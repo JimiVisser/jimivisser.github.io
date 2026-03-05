@@ -3,52 +3,78 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background — Jimi Visser</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,600&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
 
   :root {
     --ink: #111827;
     --paper: #FAFAF7;
     --accent: #B8963E;
+    --accent-light: #D4B263;
     --muted: #6B7280;
     --light-line: #D1D5DB;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E7EB;
     --tag-bg: #E5E7EB;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  @page {
-    size: A4;
-    margin: 0;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     font-family: 'Manrope', sans-serif;
     background: var(--paper);
     color: var(--ink);
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    line-height: 1.6;
   }
 
-  .page {
-    width: 210mm;
-    min-height: 297mm;
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    background: rgba(250, 250, 247, 0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  nav .nav-inner {
+    max-width: 900px;
     margin: 0 auto;
-    position: relative;
-    overflow: visible;
-    page-break-after: always;
-    background: var(--paper);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
-  .page:last-child {
-    page-break-after: auto;
+  nav .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    color: var(--ink);
   }
 
-  /* ===================== HERO ===================== */
+  nav .logo span { color: var(--accent); }
+
+  nav .back-link {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav .back-link:hover { color: var(--accent); }
+  nav .back-link::before { content: '\2190 '; color: var(--accent); }
+
+  /* ===== HERO ===== */
   .hero {
     background: var(--ink);
     color: var(--paper);
-    padding: 36px 50px 28px 50px;
+    padding: 7rem 2rem 3.5rem;
     position: relative;
     overflow: hidden;
   }
@@ -56,210 +82,150 @@
   .hero::after {
     content: '';
     position: absolute;
-    top: -80px;
-    right: -60px;
-    width: 260px;
-    height: 260px;
+    top: -100px; right: -80px;
+    width: 320px; height: 320px;
     border-radius: 50%;
-    border: 1.5px solid rgba(184,150,62,0.2);
+    border: 1.5px solid rgba(184, 150, 62, 0.15);
   }
 
-  .hero::before {
-    content: '';
-    position: absolute;
-    bottom: -120px;
-    right: 60px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    border: 1px solid rgba(184,150,62,0.1);
-  }
-
-  .hero-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
+  .container { max-width: 900px; margin: 0 auto; }
 
   .hero h1 {
     font-family: 'Fraunces', serif;
-    font-size: 48px;
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
-    letter-spacing: -1.5px;
+    letter-spacing: -1px;
     line-height: 1.15;
-    margin-bottom: 4px;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
   }
 
-  .hero h1 span.dot { color: var(--accent); }
+  .hero h1 span { color: var(--accent); }
+
+  .hero .subtitle {
+    font-size: 1rem;
+    color: rgba(245, 240, 235, 0.55);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero .positioning {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(245, 240, 235, 0.7);
+    font-style: italic;
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero .positioning strong {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
 
   .hero-badges {
     display: flex;
-    flex-direction: column;
-    gap: 6px;
-    align-items: flex-end;
-    margin-top: 6px;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-badge {
     font-family: 'Fira Code', monospace;
-    font-size: 7.5px;
+    font-size: 0.7rem;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    padding: 5px 12px;
-    border-radius: 2px;
-    white-space: nowrap;
+    padding: 0.35rem 0.8rem;
+    border-radius: 3px;
   }
 
-  .hero-badge.primary {
-    background: var(--accent);
-    color: #fff;
-  }
+  .hero-badge.primary { background: var(--accent); color: #fff; }
+  .hero-badge.secondary { background: transparent; color: rgba(245,240,235,0.5); border: 1px solid rgba(245,240,235,0.2); }
 
-  .hero-badge.secondary {
-    background: transparent;
-    color: rgba(245,240,235,0.5);
-    border: 1px solid rgba(245,240,235,0.2);
-  }
-
-  .hero-subtitle {
-    font-size: 14.5px;
-    font-weight: 400;
-    color: rgba(245,240,235,0.6);
-    margin-bottom: 18px;
-    letter-spacing: 0.2px;
-  }
-
-  .hero-contact {
-    display: flex;
-    gap: 22px;
-    font-family: 'Fira Code', monospace;
-    font-size: 8.5px;
-    color: rgba(245,240,235,0.45);
-    letter-spacing: 0.5px;
-    flex-wrap: wrap;
-  }
-
-  .hero-contact span::before {
-    content: '\2192\0020';
-    color: var(--accent);
-  }
-
-  /* ===================== POSITIONING ===================== */
-  .positioning {
-    padding: 22px 50px 18px;
-    border-bottom: 1px solid var(--light-line);
-  }
-
-  .positioning p {
-    font-family: 'Fraunces', serif;
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--ink);
-    font-style: italic;
-  }
-
-  .positioning p strong {
-    font-style: normal;
-    color: var(--accent);
-    font-weight: 700;
-  }
-
-  /* ===================== STATS BAR ===================== */
+  /* ===== STATS ===== */
   .stats-bar {
-    display: flex;
-    padding: 0 50px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2.5rem 0;
     border-bottom: 1px solid var(--light-line);
   }
 
-  .stat {
-    flex: 1;
-    padding: 16px 0;
-    text-align: center;
-    border-right: 1px solid var(--light-line);
-  }
-
-  .stat:last-child { border-right: none; }
+  .stat { text-align: center; }
 
   .stat-number {
     font-family: 'Fraunces', serif;
-    font-size: 28px;
+    font-size: 2rem;
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
-    margin-bottom: 3px;
+    margin-bottom: 0.25rem;
   }
 
   .stat-label {
     font-family: 'Fira Code', monospace;
-    font-size: 7px;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--muted);
   }
 
-  /* ===================== TWO-COL ===================== */
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    padding: 0 50px;
-  }
-
-  .col-left {
-    padding-right: 26px;
-    border-right: 1px solid var(--light-line);
-  }
-
-  .col-right {
-    padding-left: 26px;
-  }
-
-  .section {
-    padding: 20px 0 16px;
-    border-bottom: 1px solid var(--light-line);
-  }
-
-  .section:last-child { border-bottom: none; }
+  /* ===== SECTIONS ===== */
+  section { padding: 3.5rem 2rem; }
 
   .section-label {
     font-family: 'Fira Code', monospace;
-    font-size: 7.5px;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 2.5px;
     color: var(--accent);
-    margin-bottom: 14px;
+    margin-bottom: 1.5rem;
   }
 
-  /* ===================== EXPERIENCE ===================== */
-  .exp-entry { margin-bottom: 16px; }
-  .exp-entry:last-child { margin-bottom: 0; }
+  /* ===== EXPERIENCE ===== */
+  .exp-entry {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .exp-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 
   .exp-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 2px;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .exp-role {
-    font-size: 12.5px;
-    font-weight: 700;
-    letter-spacing: -0.2px;
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
   }
 
   .exp-date {
     font-family: 'Fira Code', monospace;
-    font-size: 7.5px;
+    font-size: 0.75rem;
     color: var(--muted);
     letter-spacing: 0.5px;
-    white-space: nowrap;
   }
 
   .exp-company {
-    font-size: 11px;
+    font-size: 0.9rem;
     color: var(--muted);
-    margin-bottom: 5px;
+    margin-bottom: 0.75rem;
   }
 
   .exp-bullets {
@@ -268,12 +234,12 @@
   }
 
   .exp-bullets li {
-    font-size: 9.8px;
-    line-height: 1.5;
-    color: #3A3630;
-    padding-left: 11px;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #4A4540;
+    padding-left: 1rem;
     position: relative;
-    margin-bottom: 3px;
+    margin-bottom: 0.4rem;
   }
 
   .exp-bullets li::before {
@@ -282,366 +248,290 @@
     left: 0;
     color: var(--accent);
     font-weight: 700;
-    font-size: 9px;
   }
 
-  /* ===================== TAGS ===================== */
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-  .tag {
-    font-family: 'Fira Code', monospace;
-    font-size: 7.5px;
-    letter-spacing: 0.5px;
-    padding: 4px 9px;
-    background: var(--tag-bg);
-    border-radius: 2px;
-    color: #5A5549;
+  /* ===== TWO COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
   }
 
-  .tag.highlight {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  /* ===================== CREDENTIALS ===================== */
-  .cred-item { margin-bottom: 10px; }
+  /* ===== CREDENTIALS ===== */
+  .cred-item { margin-bottom: 1.25rem; }
   .cred-item:last-child { margin-bottom: 0; }
 
   .cred-title {
-    font-size: 11px;
+    font-size: 0.95rem;
     font-weight: 600;
   }
 
   .cred-sub {
-    font-size: 9.5px;
+    font-size: 0.85rem;
     color: var(--muted);
-    line-height: 1.4;
-  }
-
-  /* ===================== PAGE 2 ===================== */
-
-  .p2-header {
-    padding: 32px 50px 0;
-  }
-
-  .p2-header h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 3px;
-  }
-
-  .p2-header h2 span { color: var(--accent); }
-
-  .p2-header p {
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 0;
-  }
-
-  /* --- VENTURE CARDS --- */
-  .ventures-section {
-    padding: 20px 50px 0;
-  }
-
-  .venture-card {
-    background: var(--ink);
-    color: var(--paper);
-    border-radius: 4px;
-    padding: 20px 26px;
-    margin-bottom: 12px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .venture-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: var(--accent);
-  }
-
-  .venture-card h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 17px;
-    font-weight: 700;
-    margin-bottom: 2px;
-  }
-
-  .venture-card .venture-type {
-    font-family: 'Fira Code', monospace;
-    font-size: 7px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--accent);
-    margin-bottom: 6px;
-  }
-
-  .venture-card p {
-    font-size: 9px;
     line-height: 1.5;
-    color: rgba(245,240,235,0.7);
-    max-width: 540px;
   }
 
-  .venture-card .venture-tags {
-    margin-top: 8px;
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-  }
+  /* ===== TAGS ===== */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
-  .venture-card .venture-tag {
+  .tag {
     font-family: 'Fira Code', monospace;
-    font-size: 7px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 3px 9px;
-    border: 1px solid rgba(245,240,235,0.2);
-    border-radius: 2px;
-    color: rgba(245,240,235,0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.7rem;
+    background: var(--tag-bg);
+    border-radius: 3px;
+    color: #5A5549;
   }
 
-  .venture-card .venture-tag.ai {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
+  .tag.highlight { background: var(--accent); color: #fff; }
 
-  /* --- AI PROFICIENCY --- */
-  .ai-section {
-    padding: 20px 50px 0;
-  }
-
+  /* ===== AI CARDS ===== */
   .ai-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.5rem;
   }
 
   .ai-card {
-    border: 1px solid var(--light-line);
-    border-radius: 4px;
-    padding: 14px 14px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
     position: relative;
+    overflow: hidden;
   }
 
   .ai-card::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
     background: var(--accent);
-    border-radius: 4px 4px 0 0;
   }
 
   .ai-card h4 {
-    font-size: 11px;
+    font-size: 0.95rem;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
   }
 
   .ai-card p {
-    font-size: 9px;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.6;
     color: var(--muted);
   }
 
-  /* --- EXTRACURRICULARS --- */
-  .extra-section {
-    padding: 20px 50px 0;
-  }
-
-  .extra-grid {
+  /* ===== NOTABLE PROJECTS ===== */
+  .projects-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
   }
 
-  .extra-item h4 {
-    font-size: 11px;
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .project-card h4 {
+    font-size: 0.95rem;
     font-weight: 700;
-    margin-bottom: 3px;
+    margin-bottom: 0.25rem;
   }
 
-  .extra-item .extra-sub {
+  .project-card .project-sub {
     font-family: 'Fira Code', monospace;
-    font-size: 7.5px;
+    font-size: 0.7rem;
     color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 4px;
+    margin-bottom: 0.5rem;
   }
 
-  .extra-item p {
-    font-size: 8.5px;
-    line-height: 1.45;
+  .project-card p {
+    font-size: 0.85rem;
+    line-height: 1.55;
     color: var(--muted);
   }
 
-  /* --- FOOTER --- */
-  .cv-footer {
-    margin-top: 20px;
-    padding: 16px 50px;
-    border-top: 1px solid var(--light-line);
-    border-top: 1px solid var(--light-line);
+  /* ===== LANGUAGES ===== */
+  .lang-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
   }
 
-  .footer-langs {
-    display: flex;
-    gap: 16px;
-  }
-
-  .footer-lang {
-    font-family: 'Fira Code', monospace;
-    font-size: 8px;
+  .lang-item {
+    font-size: 0.9rem;
     color: var(--muted);
-    letter-spacing: 0.5px;
   }
 
-  .footer-lang strong {
+  .lang-item strong {
     color: var(--ink);
     font-weight: 600;
   }
 
-  .footer-note {
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--light-line);
+  }
+
+  footer p {
     font-family: 'Fira Code', monospace;
-    font-size: 7px;
+    font-size: 0.7rem;
     color: var(--muted);
     letter-spacing: 0.5px;
   }
 
+  footer .status {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-family: 'Manrope', sans-serif;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .ai-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    nav .back-link span { display: none; }
+    section { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-bar { grid-template-columns: 1fr; }
+    .exp-header { flex-direction: column; }
+    .hero-badges { flex-direction: column; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ==================== PAGE 1 ==================== -->
-<div class="page">
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Jimi Visser<span>.</span></a>
+    <a href="index.html" class="back-link"><span>Back to </span>home</a>
+  </div>
+</nav>
 
-  <div class="hero">
-    <div class="hero-top">
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <h1>Background<span>.</span></h1>
+    <div class="subtitle">Account Manager &middot; AI Project Lead &middot; Creative Producer</div>
+    <p class="positioning">Account manager who bridges <strong>strategy, creative, and production</strong> with an AI-first mindset. At Ogilvy I lead cross-market client delivery and drive AI adoption across workflows. On the side I build ventures from scratch &mdash; scaling teams to 25, managing &euro;850K budgets, and shipping my first app. I bring the same instinct everywhere: <strong>own the delivery, automate what slows it down, grow the relationship</strong>.</p>
+    <div class="hero-badges">
+      <span class="hero-badge primary">Cannes Lions '20</span>
+      <span class="hero-badge secondary">Claude Certified (in progress)</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding-bottom: 0;">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-number">&euro;850K</div>
+        <div class="stat-label">Single project budget</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">25</div>
+        <div class="stat-label">Production crew managed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Direct reports led</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3</div>
+        <div class="stat-label">Ventures &amp; side projects</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+  <div class="container">
+    <div class="section-label">Experience</div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <div class="exp-role">Account Manager</div>
+        <div class="exp-date">Nov 2024 &mdash; Present</div>
+      </div>
+      <div class="exp-company">Ogilvy Amsterdam</div>
+      <ul class="exp-bullets">
+        <li>Own end-to-end client delivery for CJ CheilJedang (Bibigo) &mdash; built account structure from scratch, coordinating across South Korean client, APAC hub in Singapore, and local production</li>
+        <li>Two campaigns featured in international press (LBBOnline, Famous Campaigns, Roastbrief): Loods 5 'Showroom on Ice' (30% sales uplift, 2.8M reach) and Testicular Cancer Foundation</li>
+        <li>Leading AI adoption across account operations &mdash; automated briefing, reporting, and performance tracking using Claude, cutting turnaround times on recurring deliverables</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <div class="exp-role">Producer &rarr; EP &rarr; Creative Dev. &amp; Growth</div>
+        <div class="exp-date">Sep 2020 &mdash; Nov 2024</div>
+      </div>
+      <div class="exp-company">DPPLR</div>
+      <ul class="exp-bullets">
+        <li>Promoted 3x in 4 years: Producer &rarr; Executive Producer &rarr; Creative Development &amp; Growth lead</li>
+        <li>Led teams of up to 6 direct reports in-house and coordinated freelance crews of 25 on set; managed single-project budgets up to &euro;850K</li>
+        <li>Executive Produced feature film 'Alice' &mdash; overseeing full lifecycle from pre-production to delivery (Aug&ndash;Dec 2023)</li>
+        <li>Built new business pipeline through upselling existing clients and prospecting; led international shoots contributing directly to revenue growth</li>
+        <li>Introduced project management and delivery systems that reduced turnaround times by ~30% and improved SLA adherence</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <div class="exp-role">Freelance Producer &amp; Consultant</div>
+        <div class="exp-date">2019 &mdash; 2021</div>
+      </div>
+      <div class="exp-company">BEP+Schnitzel &middot; Ad.Business &middot; Google (via Cannes Lions Roger Hatchuel Academy)</div>
+      <ul class="exp-bullets">
+        <li>Production management across multiple clients; developed strategic concept for Google as NL representative at Cannes Lions 2020</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION + CERTS + SKILLS -->
+<section style="background: #fff; border-top: 1px solid var(--light-line); border-bottom: 1px solid var(--light-line);">
+  <div class="container">
+    <div class="two-col">
+
       <div>
-        <h1>Jimi Visser<span class="dot">.</span></h1>
-        <div class="hero-subtitle">Account Manager · AI Project Lead · Creative Producer</div>
-      </div>
-      <div class="hero-badges">
-        <div class="hero-badge primary">Cannes Lions '20</div>
-        <div class="hero-badge secondary">Claude Certified (in progress)</div>
-      </div>
-    </div>
-    <div class="hero-contact">
-      <span>jimivisser@gmail.com</span>
-      <span>linkedin.com/in/jimi-visser-account-management-ogilvy</span>
-      <span>Amsterdam, NL</span>
-      <span>+31 6 1895 0069</span>
-    </div>
-  </div>
-
-  <div class="positioning">
-    <p>Account manager who bridges <strong>strategy, creative, and production</strong> with an AI-first mindset. At Ogilvy I lead cross-market client delivery and drive AI adoption across workflows. On the side I build ventures from scratch — scaling teams to 25, managing &euro;850K budgets, and shipping my first app. I bring the same instinct everywhere: <strong>own the delivery, automate what slows it down, grow the relationship</strong>.</p>
-  </div>
-
-  <div class="stats-bar">
-    <div class="stat">
-      <div class="stat-number">&euro;850K</div>
-      <div class="stat-label">Single project budget</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">25</div>
-      <div class="stat-label">Production crew managed</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">6</div>
-      <div class="stat-label">Direct reports led</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">3</div>
-      <div class="stat-label">Ventures &amp; side projects</div>
-    </div>
-  </div>
-
-  <div class="content-grid">
-
-    <div class="col-left">
-
-      <div class="section">
-        <div class="section-label">Experience</div>
-
-        <div class="exp-entry">
-          <div class="exp-header">
-            <div class="exp-role">Account Manager</div>
-            <div class="exp-date">Nov 2024 — Present</div>
-          </div>
-          <div class="exp-company">Ogilvy Amsterdam</div>
-          <ul class="exp-bullets">
-            <li>Own end-to-end client delivery for CJ CheilJedang (Bibigo) — built account structure from scratch, coordinating across South Korean client, APAC hub in Singapore, and local production</li>
-            <li>Two campaigns featured in international press (LBBOnline, Famous Campaigns, Roastbrief): Loods 5 'Showroom on Ice' (30% sales uplift, 2.8M reach) and Testicular Cancer Foundation</li>
-            <li>Leading AI adoption across account operations — automated briefing, reporting, and performance tracking using Claude, cutting turnaround times on recurring deliverables</li>
-          </ul>
-        </div>
-
-        <div class="exp-entry">
-          <div class="exp-header">
-            <div class="exp-role">Producer &rarr; EP &rarr; Creative Dev. &amp; Growth</div>
-            <div class="exp-date">Sep 2020 — Nov 2024</div>
-          </div>
-          <div class="exp-company">DPPLR</div>
-          <ul class="exp-bullets">
-            <li>Promoted 3x in 4 years: Producer → Executive Producer → Creative Development &amp; Growth lead</li>
-            <li>Led teams of up to 6 direct reports in-house and coordinated freelance crews of 25 on set; managed single-project budgets up to &euro;850K</li>
-            <li>Executive Produced feature film 'Alice' — overseeing full lifecycle from pre-production to delivery (Aug–Dec 2023)</li>
-            <li>Built new business pipeline through upselling existing clients and prospecting; led international shoots contributing directly to revenue growth</li>
-            <li>Introduced project management and delivery systems that reduced turnaround times by ~30% and improved SLA adherence</li>
-          </ul>
-        </div>
-
-        <div class="exp-entry">
-          <div class="exp-header">
-            <div class="exp-role">Freelance Producer &amp; Consultant</div>
-            <div class="exp-date">2019 — 2021</div>
-          </div>
-          <div class="exp-company">BEP+Schnitzel · Ad.Business · Google (via Cannes Lions Roger Hatchuel Academy)</div>
-          <ul class="exp-bullets">
-            <li>Production management across multiple clients; developed strategic concept for Google as NL representative at Cannes Lions 2020</li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="col-right">
-
-      <div class="section">
         <div class="section-label">Education</div>
-
         <div class="cred-item">
           <div class="cred-title">Marketing &amp; Communication (Bachelor)</div>
           <div class="cred-sub">The New School Amsterdam</div>
         </div>
-
         <div class="cred-item">
           <div class="cred-title">VWO NG/NT</div>
           <div class="cred-sub">Sint-Nicolaas Lyceum</div>
         </div>
-      </div>
 
-      <div class="section">
-        <div class="section-label">Certifications</div>
+        <div class="section-label" style="margin-top: 2.5rem;">Certifications</div>
         <div class="cred-item">
           <div class="cred-title">NIMA A &amp; NIMA B Marketing</div>
-          <div class="cred-sub">Netherlands Institute of Marketing — nationally recognised, EMC-accredited (EQF Level 6)</div>
+          <div class="cred-sub">Netherlands Institute of Marketing &mdash; nationally recognised, EMC-accredited (EQF Level 6)</div>
         </div>
         <div class="cred-item">
           <div class="cred-title">Anthropic Claude Certification</div>
-          <div class="cred-sub">In progress via SkillJar — prompt engineering, API integration, AI workflow design</div>
+          <div class="cred-sub">In progress via SkillJar &mdash; prompt engineering, API integration, AI workflow design</div>
         </div>
         <div class="cred-item">
           <div class="cred-title">Cambridge CPE (C2 Proficiency)</div>
@@ -649,7 +539,7 @@
         </div>
       </div>
 
-      <div class="section">
+      <div>
         <div class="section-label">Core Capabilities</div>
         <div class="tags">
           <span class="tag highlight">AI Tools &amp; Automation</span>
@@ -665,10 +555,8 @@
           <span class="tag">Pitch Development</span>
           <span class="tag">App Development</span>
         </div>
-      </div>
 
-      <div class="section">
-        <div class="section-label">Key Clients</div>
+        <div class="section-label" style="margin-top: 2.5rem;">Key Clients</div>
         <div class="tags">
           <span class="tag">Ford</span>
           <span class="tag">AkzoNobel</span>
@@ -678,52 +566,21 @@
           <span class="tag">Testicular Cancer Foundation</span>
           <span class="tag">Google</span>
         </div>
+
+        <div class="section-label" style="margin-top: 2.5rem;">Languages</div>
+        <div class="lang-row">
+          <div class="lang-item"><strong>English</strong> Native (C2 CPE)</div>
+          <div class="lang-item"><strong>Dutch</strong> Professional</div>
+        </div>
       </div>
 
     </div>
   </div>
+</section>
 
-</div>
-
-<!-- ==================== PAGE 2 ==================== -->
-<div class="page">
-
-  <div class="p2-header">
-    <h2>Ventures <span>&amp;</span> AI</h2>
-    <p>What I build outside the 9-to-5 — where curiosity meets code.</p>
-  </div>
-
-  <div class="ventures-section">
-
-    <div class="venture-card">
-      <h3>Studio 1104</h3>
-      <div class="venture-type">Founder · Media Startup</div>
-      <p>A media venture creating vertical video content addressing social issues for teenagers (12–15). AI-powered from ideation to production. Business model targets Dutch schools through licensing.</p>
-      <div class="venture-tags">
-        <span class="venture-tag ai">AI-Powered Production</span>
-        <span class="venture-tag ai">AI Content Development</span>
-        <span class="venture-tag">Vertical Video</span>
-        <span class="venture-tag">Social Impact</span>
-        <span class="venture-tag">EdTech / Licensing</span>
-        <span class="venture-tag">Gen Z Audience</span>
-      </div>
-    </div>
-
-    <div class="venture-card">
-      <h3>Location-Based Social App</h3>
-      <div class="venture-type">Creator · App in Development</div>
-      <p>First self-built application — a location-based tool integrating business social followings into a map interface. Designed, scoped, and developed using AI-assisted coding workflows.</p>
-      <div class="venture-tags">
-        <span class="venture-tag ai">AI-Assisted Development</span>
-        <span class="venture-tag">Location Intelligence</span>
-        <span class="venture-tag">Social Integration</span>
-        <span class="venture-tag">Product Design</span>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="ai-section">
+<!-- AI PROFICIENCY -->
+<section>
+  <div class="container">
     <div class="section-label">AI Proficiency</div>
     <div class="ai-grid">
       <div class="ai-card">
@@ -732,7 +589,7 @@
       </div>
       <div class="ai-card">
         <h4>AI-Assisted Building</h4>
-        <p>Using Claude Code and AI tools to build functional applications — from concept to working product without a traditional dev background.</p>
+        <p>Using Claude Code and AI tools to build functional applications &mdash; from concept to working product without a traditional dev background.</p>
       </div>
       <div class="ai-card">
         <h4>Workflow Automation</h4>
@@ -740,42 +597,42 @@
       </div>
     </div>
   </div>
+</section>
 
-  <div class="extra-section">
+<!-- NOTABLE PROJECTS -->
+<section style="background: #fff; border-top: 1px solid var(--light-line); border-bottom: 1px solid var(--light-line);">
+  <div class="container">
     <div class="section-label">Notable Projects</div>
-    <div class="extra-grid">
-      <div class="extra-item">
+    <div class="projects-grid">
+      <div class="project-card">
         <h4>Cannes Lions Roger Hatchuel Academy</h4>
-        <div class="extra-sub">2020 · Netherlands Representative</div>
+        <div class="project-sub">2020 &middot; Netherlands Representative</div>
         <p>Global programme for next-gen creative leaders. Extended strategic project for Google on brand positioning.</p>
       </div>
-      <div class="extra-item">
+      <div class="project-card">
         <h4>Epica Creative Circles</h4>
-        <div class="extra-sub">2020 · Concept &amp; Identity Design</div>
+        <div class="project-sub">2020 &middot; Concept &amp; Identity Design</div>
         <p>Designed marketing communications and corporate identity for the conference preceding the Epica Awards.</p>
       </div>
-      <div class="extra-item">
+      <div class="project-card">
         <h4>Feature Film: 'Alice'</h4>
-        <div class="extra-sub">2023 · Executive Producer at DPPLR</div>
-        <p>Full executive production of a feature film — cast, crew, budget, and post-production across 5 months.</p>
+        <div class="project-sub">2023 &middot; Executive Producer at DPPLR</div>
+        <p>Full executive production of a feature film &mdash; cast, crew, budget, and post-production across 5 months.</p>
       </div>
-      <div class="extra-item">
+      <div class="project-card">
         <h4>Future of Education</h4>
-        <div class="extra-sub">Business School Berlin/Hamburg</div>
+        <div class="project-sub">Business School Berlin/Hamburg</div>
         <p>International programme on digitalization in education. Co-created a platform connecting industry and students.</p>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="cv-footer">
-    <div class="footer-langs">
-      <div class="footer-lang"><strong>English</strong> Native (C2 CPE)</div>
-      <div class="footer-lang"><strong>Dutch</strong> Professional</div>
-    </div>
-    <div class="footer-note">Currently: completing Claude certification · building Studio 1104 · shipping first app</div>
-  </div>
-
-</div>
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Jimi Visser &middot; Amsterdam</p>
+  <div class="status">Currently: completing Claude certification &middot; building Studio 1104 &middot; shipping first app</div>
+</footer>
 
 </body>
 </html>
