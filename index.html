@@ -82,36 +82,117 @@
 
   nav .logo span { color: var(--accent); }
 
-  nav .nav-links {
+
+  /* Hamburger */
+  .hamburger {
+    width: 28px;
+    height: 20px;
     display: flex;
-    gap: 2rem;
-    list-style: none;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    z-index: 110;
   }
 
-  nav .nav-links a {
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: rgba(245, 240, 235, 0.6);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Slide-out menu */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.97);
+    backdrop-filter: blur(24px);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .menu-list {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .menu-list li {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-overlay.open .menu-list li {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .menu-overlay.open .menu-list li:nth-child(1) { transition-delay: 0.1s; }
+  .menu-overlay.open .menu-list li:nth-child(2) { transition-delay: 0.15s; }
+  .menu-overlay.open .menu-list li:nth-child(3) { transition-delay: 0.2s; }
+  .menu-overlay.open .menu-list li:nth-child(4) { transition-delay: 0.25s; }
+  .menu-overlay.open .menu-list li:nth-child(5) { transition-delay: 0.3s; }
+  .menu-overlay.open .menu-list li:nth-child(6) { transition-delay: 0.35s; }
+
+  .menu-list a {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 600;
     color: rgba(245, 240, 235, 0.5);
     text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.2s;
+    display: inline-block;
+    padding: 0.25rem 0;
+  }
+
+  .menu-list a:hover {
+    color: var(--accent);
+  }
+
+  .menu-list .menu-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(184, 150, 62, 0.2);
+    margin: 0.75rem auto;
+  }
+
+  .menu-list .menu-small a {
+    font-family: 'Fira Code', monospace;
     font-size: 0.85rem;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-  nav .nav-links a:hover { color: var(--paper); }
-
-  .nav-cta {
-    background: var(--accent) !important;
-    color: #fff !important;
-    padding: 0.45rem 1.2rem;
-    border-radius: 6px;
-    font-weight: 600 !important;
-    transition: all 0.3s !important;
-  }
-
-  .nav-cta:hover {
-    background: var(--accent-light) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(184, 150, 62, 0.3);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   /* ===== HERO ===== */
@@ -699,8 +780,7 @@
     .work-grid { grid-template-columns: 1fr; }
     .stats-strip { grid-template-columns: repeat(2, 1fr); }
     .stat-item:nth-child(2)::after { display: none; }
-    nav .nav-links { display: none; }
-    .hero { padding: 8rem 1.5rem 4rem; min-height: auto; }
+.hero { padding: 8rem 1.5rem 4rem; min-height: auto; }
     section { padding: 4rem 1.5rem; }
     .section-transition, .section-transition-reverse { height: 60px; }
   }
@@ -722,15 +802,26 @@
 <nav>
   <div class="nav-inner">
     <div class="logo">Jimi Visser<span>.</span></div>
-    <ul class="nav-links">
-      <li><a href="cv.html">Background</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#ventures">Ventures</a></li>
-      <li><a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a></li>
-      <li><a href="#contact" class="nav-cta">Get in touch</a></li>
-    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </nav>
+
+<!-- FULL-SCREEN MENU -->
+<div class="menu-overlay" id="menu">
+  <ul class="menu-list">
+    <li><a href="cv.html" onclick="toggleMenu()">Background</a></li>
+    <li><a href="#work" onclick="toggleMenu()">Work</a></li>
+    <li><a href="#ventures" onclick="toggleMenu()">Ventures</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    <li><div class="menu-divider"></div></li>
+    <li class="menu-small"><a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li class="menu-small"><a href="mailto:jimivisser@gmail.com">Email</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <div class="hero">
@@ -741,6 +832,12 @@
     <div class="hero-eyebrow fade-up">Currently at Ogilvy Amsterdam</div>
     <h1 class="fade-up stagger-1">Jimi Visser<span>.</span></h1>
     <p class="bio fade-up stagger-2">Account manager who bridges <strong>strategy, creative, and production</strong> with an AI-first mindset. Leading cross-market client delivery and driving AI adoption across workflows. On the side, building ventures from scratch.</p>
+    <div class="hero-links fade-up stagger-3">
+      <a href="cv.html">Background</a>
+      <a href="#work">Featured work</a>
+      <a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:jimivisser@gmail.com">jimivisser@gmail.com</a>
+    </div>
   </div>
 </div>
 
@@ -911,6 +1008,13 @@
   window.addEventListener('scroll', () => {
     document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
   });
+
+  // Hamburger menu
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.getElementById('menu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('menu').classList.contains('open') ? 'hidden' : '';
+  }
 </script>
 
 </body>
