@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jimi Visser &mdash; Projectleider Online &middot; Gemeente Amsterdam</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #111827;
+    --paper: #FAFAF7;
+    --accent: #B8963E;
+    --accent-light: #D4B263;
+    --accent-glow: rgba(184, 150, 62, 0.08);
+    --muted: #6B7280;
+    --light-line: #D1D5DB;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E7EB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stagger-1 { transition-delay: 0.05s; }
+  .stagger-2 { transition-delay: 0.1s; }
+  .stagger-3 { transition-delay: 0.15s; }
+  .stagger-4 { transition-delay: 0.2s; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184, 150, 62, 0.1);
+    transition: all 0.3s;
+  }
+
+  nav.scrolled {
+    padding: 0.75rem 2rem;
+    background: rgba(17, 24, 39, 0.98);
+  }
+
+  nav .nav-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--paper);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  /* Hamburger */
+  .hamburger {
+    width: 28px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+    z-index: 110;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: rgba(245, 240, 235, 0.6);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+  }
+
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Slide-out menu */
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.97);
+    backdrop-filter: blur(24px);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .menu-list {
+    list-style: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .menu-list li {
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .menu-overlay.open .menu-list li {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .menu-overlay.open .menu-list li:nth-child(1) { transition-delay: 0.1s; }
+  .menu-overlay.open .menu-list li:nth-child(2) { transition-delay: 0.15s; }
+  .menu-overlay.open .menu-list li:nth-child(3) { transition-delay: 0.2s; }
+  .menu-overlay.open .menu-list li:nth-child(4) { transition-delay: 0.25s; }
+  .menu-overlay.open .menu-list li:nth-child(5) { transition-delay: 0.3s; }
+  .menu-overlay.open .menu-list li:nth-child(6) { transition-delay: 0.35s; }
+
+  .menu-list a {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: rgba(245, 240, 235, 0.5);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.2s;
+    display: inline-block;
+    padding: 0.25rem 0;
+  }
+
+  .menu-list a:hover {
+    color: var(--accent);
+  }
+
+  .menu-list .menu-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(184, 150, 62, 0.2);
+    margin: 0.75rem auto;
+  }
+
+  .menu-list .menu-small a {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 10rem 2rem 6rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -150px; right: -100px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(184, 150, 62, 0.08);
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    bottom: -200px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    border: 1px solid rgba(184, 150, 62, 0.06);
+    animation: float 25s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(20px, -20px); }
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(184, 150, 62, 0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    bottom: -10%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(184, 150, 62, 0.04) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184, 150, 62, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184, 150, 62, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at 70% 30%, black 20%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at 70% 30%, black 20%, transparent 70%);
+  }
+
+  .hero .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 2rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero .bio {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(245, 240, 235, 0.6);
+    max-width: 580px;
+    margin-bottom: 3rem;
+  }
+
+  .hero .bio strong {
+    color: rgba(245, 240, 235, 0.9);
+    font-weight: 600;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    color: rgba(245, 240, 235, 0.45);
+    text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid rgba(245, 240, 235, 0.1);
+    border-radius: 6px;
+    transition: all 0.3s;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-links a:hover {
+    color: var(--accent);
+    border-color: rgba(184, 150, 62, 0.4);
+    background: rgba(184, 150, 62, 0.05);
+    transform: translateY(-1px);
+  }
+
+  .hero-links a::before {
+    content: '\2192';
+    color: var(--accent);
+    transition: transform 0.2s;
+  }
+
+  .hero-links a:hover::before {
+    transform: translateX(2px);
+  }
+
+  /* ===== STATS ===== */
+  .stats-section {
+    background: var(--ink);
+    padding: 0 2rem 5rem;
+  }
+
+  .stats-strip {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid rgba(184, 150, 62, 0.15);
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    position: relative;
+  }
+
+  .stat-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 25%;
+    height: 50%;
+    width: 1px;
+    background: rgba(184, 150, 62, 0.12);
+  }
+
+  .stat-item .number {
+    font-family: 'Fraunces', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-item .label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(245, 240, 235, 0.35);
+    margin-top: 0.6rem;
+    line-height: 1.4;
+  }
+
+  /* ===== SECTION TRANSITIONS ===== */
+  .section-transition {
+    height: 120px;
+    background: linear-gradient(to bottom, var(--ink), var(--paper));
+  }
+
+  .section-transition-reverse {
+    height: 120px;
+    background: linear-gradient(to bottom, var(--paper), var(--ink));
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 6rem 2rem;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 24px;
+    height: 1.5px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.75rem;
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+
+  /* ===== WHY ME ===== */
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .fit-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2.25rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fit-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .fit-card:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(184, 150, 62, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .fit-card .fit-type {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .fit-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.3px;
+  }
+
+  .fit-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ===== FEATURED WORK ===== */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .work-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2.25rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .work-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .work-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .work-card:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(184, 150, 62, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .work-card .work-type {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .work-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    letter-spacing: -0.3px;
+  }
+
+  .work-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .work-card .work-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .work-card .work-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.5px;
+    padding: 0.3rem 0.7rem;
+    background: #F3F4F6;
+    border-radius: 4px;
+    color: #5A5549;
+  }
+
+  .work-card .work-tag.highlight {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .work-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .work-links a {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .work-links a::before {
+    content: '\2192';
+    transition: transform 0.2s;
+  }
+
+  .work-links a:hover {
+    color: var(--ink);
+  }
+
+  .work-links a:hover::before {
+    transform: translateX(3px);
+  }
+
+  /* ===== VENTURES ===== */
+  .ventures-section {
+    background: var(--ink);
+    color: var(--paper);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ventures-section .ventures-glow {
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(184, 150, 62, 0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .ventures-section .container { position: relative; z-index: 1; }
+
+  .venture-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .venture-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--accent-light));
+  }
+
+  .venture-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(184, 150, 62, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .venture-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .venture-card .venture-type {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .venture-card p {
+    font-size: 0.92rem;
+    color: rgba(245, 240, 235, 0.6);
+    line-height: 1.7;
+    max-width: 600px;
+  }
+
+  .venture-tags {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .venture-tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid rgba(245, 240, 235, 0.1);
+    border-radius: 4px;
+    color: rgba(245, 240, 235, 0.35);
+  }
+
+  .venture-tag.ai {
+    border-color: rgba(184, 150, 62, 0.4);
+    color: var(--accent);
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-section {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .contact-section .container { position: relative; z-index: 1; }
+  .contact-section .section-label { justify-content: center; }
+
+  .contact-section .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .contact-section .section-sub {
+    margin: 0 auto 2.5rem;
+    max-width: 480px;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-links a {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--light-line);
+    border-radius: 8px;
+    transition: all 0.3s;
+    letter-spacing: 0.3px;
+  }
+
+  .contact-links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(184, 150, 62, 0.1);
+  }
+
+  .contact-links a::before {
+    content: '\2192 ';
+    color: var(--accent);
+  }
+
+  /* ===== DIVIDER ===== */
+  .divider {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .divider-line {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--light-line), transparent);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .fit-grid, .work-grid { grid-template-columns: 1fr; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat-item:nth-child(2)::after { display: none; }
+    .hero { padding: 8rem 1.5rem 4rem; min-height: auto; }
+    section { padding: 4rem 1.5rem; }
+    .section-transition, .section-transition-reverse { height: 60px; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-strip { grid-template-columns: 1fr; }
+    .stat-item::after { display: none !important; }
+    .stat-item { padding: 1.5rem 1rem; border-bottom: 1px solid rgba(184, 150, 62, 0.08); }
+    .stat-item:last-child { border-bottom: none; }
+    .hero-links { flex-direction: column; }
+    .contact-links { flex-direction: column; align-items: center; }
+    .hero h1 { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Jimi Visser<span>.</span></div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- FULL-SCREEN MENU -->
+<div class="menu-overlay" id="menu">
+  <ul class="menu-list">
+    <li><a href="cv.html" onclick="toggleMenu()">Achtergrond</a></li>
+    <li><a href="#fit" onclick="toggleMenu()">Aansluiting</a></li>
+    <li><a href="#work" onclick="toggleMenu()">Projecten</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    <li><div class="menu-divider"></div></li>
+    <li class="menu-small"><a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a></li>
+    <li class="menu-small"><a href="mailto:jimivisser@gmail.com">Email</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-grid"></div>
+  <div class="container">
+    <div class="hero-eyebrow fade-up">Sollicitatie &middot; Gemeente Amsterdam</div>
+    <h1 class="fade-up stagger-1">Jimi Visser<span>.</span></h1>
+    <p class="bio fade-up stagger-2">Projectleider met een achtergrond in <strong>account management, productie en digitale strategie</strong>. Ik run projecten van A tot Z, houd overzicht over planning en stakeholders, en zoek altijd naar manieren om processen slimmer in te richten.</p>
+    <div class="hero-links fade-up stagger-3">
+      <a href="cv.html">Achtergrond</a>
+      <a href="#fit">Aansluiting</a>
+      <a href="#work">Projecten</a>
+      <a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:jimivisser@gmail.com">jimivisser@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="stats-strip">
+    <div class="stat-item fade-up stagger-1">
+      <div class="number">6+</div>
+      <div class="label">Jaar projectervaring</div>
+    </div>
+    <div class="stat-item fade-up stagger-2">
+      <div class="number">25</div>
+      <div class="label">Grootste team aangestuurd</div>
+    </div>
+    <div class="stat-item fade-up stagger-3">
+      <div class="number">&euro;850K</div>
+      <div class="label">Grootste projectbudget</div>
+    </div>
+    <div class="stat-item fade-up stagger-4">
+      <div class="number">250+</div>
+      <div class="label">Medewerkers in huidige org</div>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSITION -->
+<div class="section-transition"></div>
+
+<!-- WHY ME / FIT -->
+<section id="fit">
+  <div class="container">
+    <div class="section-label fade-up">Aansluiting</div>
+    <h2 class="section-title fade-up">Waarom deze rol bij mij past</h2>
+    <p class="section-sub fade-up">Wat ik meeneem voor het team Online bij de directie Communicatie.</p>
+
+    <div class="fit-grid">
+
+      <div class="fit-card fade-up stagger-1">
+        <div class="fit-type">Projectleiderschap</div>
+        <h3>Van plan tot oplevering</h3>
+        <p>Bij DPPLR en Ogilvy heb ik projecten geleid van eerste briefing tot eindresultaat. Ik maak planningen, zet de juiste mensen bij elkaar en houd voortgang en kwaliteit in de gaten. Dat deed ik voor campagnes, filmproducties en internationale accounts.</p>
+      </div>
+
+      <div class="fit-card fade-up stagger-2">
+        <div class="fit-type">Digitaal &amp; online</div>
+        <h3>Ervaring in het digitale veld</h3>
+        <p>Ik werk al jaren in digitale communicatie en productie. Van online campagnes en contentstrategieen tot het bouwen van mijn eigen app en een mediaplatform. Ik snap hoe digitale projecten werken, ook aan de technische kant.</p>
+      </div>
+
+      <div class="fit-card fade-up stagger-3">
+        <div class="fit-type">Samenwerking</div>
+        <h3>Verbinden van teams en stakeholders</h3>
+        <p>Bij Ogilvy werk ik dagelijks samen met klanten in Seoul, een hub in Singapore en lokale teams. Bij DPPLR deed ik hetzelfde met cast, crew, freelancers en opdrachtgevers. Ik weet hoe je iedereen op dezelfde lijn krijgt.</p>
+      </div>
+
+      <div class="fit-card fade-up stagger-4">
+        <div class="fit-type">Complexe organisaties</div>
+        <h3>Werken in grote organisaties</h3>
+        <p>Ogilvy heeft wereldwijd duizenden medewerkers. Ik ben gewend aan de dynamiek van grote organisaties: afstemmen met meerdere afdelingen, rekening houden met verschillende belangen en toch snel schakelen.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRANSITION -->
+<div class="section-transition-reverse"></div>
+
+<!-- PROJECTS / WORK -->
+<section id="work" class="ventures-section">
+  <div class="ventures-glow"></div>
+  <div class="container">
+    <div class="section-label fade-up" style="color: var(--accent);">Recente projecten</div>
+    <h2 class="section-title fade-up" style="color: var(--paper);">Wat ik heb opgeleverd</h2>
+    <p class="section-sub fade-up" style="color: rgba(245, 240, 235, 0.45);">Selectie van projecten bij Ogilvy en DPPLR.</p>
+
+    <div class="venture-card fade-up">
+      <h3>Loods 5 &mdash; Showroom on Ice</h3>
+      <div class="venture-type">Ogilvy Amsterdam &middot; 2025</div>
+      <p>Projectleiding van een experiential campagne: een ijsbaan omgebouwd tot showroom. Coordinatie van productie, media en klant. Het resultaat: 30% meer omzet en coverage in internationale vakpers.</p>
+      <div class="venture-tags">
+        <span class="venture-tag ai">Projectleiding</span>
+        <span class="venture-tag">Experiential</span>
+        <span class="venture-tag">Cross-team</span>
+      </div>
+    </div>
+
+    <div class="venture-card fade-up">
+      <h3>Testicular Cancer Foundation</h3>
+      <div class="venture-type">Ogilvy Amsterdam &middot; 2026</div>
+      <p>Campagne voor bewustwording rond testiculaire kanker, opgepikt door internationale media (Roastbrief, Famous Campaigns). Ik coordineerde het traject van concept tot publicatie.</p>
+      <div class="venture-tags">
+        <span class="venture-tag ai">Projectleiding</span>
+        <span class="venture-tag">Health Awareness</span>
+        <span class="venture-tag">Internationale pers</span>
+      </div>
+    </div>
+
+    <div class="venture-card fade-up">
+      <h3>Feature Film: Alice</h3>
+      <div class="venture-type">DPPLR &middot; 2023</div>
+      <p>Executive Producer van een speelfilm. Vijf maanden lang verantwoordelijk voor budget, planning, cast, crew en postproductie. Een van de meest complexe projecten die ik heb geleid.</p>
+      <div class="venture-tags">
+        <span class="venture-tag ai">Executive Producer</span>
+        <span class="venture-tag">Filmproductie</span>
+        <span class="venture-tag">Budgetbeheer</span>
+      </div>
+    </div>
+
+    <div class="venture-card fade-up">
+      <h3>Studio 1104</h3>
+      <div class="venture-type">Eigen initiatief &middot; 2025 &mdash; heden</div>
+      <p>Een mediaplatform voor tieners (12-15) over maatschappelijke thema's. Ik heb dit zelf opgezet: van contentstrategie tot businessmodel (licenties aan scholen). Laat zien dat ik initiatief neem en zelfstandig werk.</p>
+      <div class="venture-tags">
+        <span class="venture-tag ai">Contentstrategie</span>
+        <span class="venture-tag">Ondernemerschap</span>
+        <span class="venture-tag">EdTech</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- TRANSITION -->
+<div class="section-transition"></div>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="container">
+    <div class="section-label fade-up">Contact</div>
+    <h2 class="section-title fade-up">Laten we kennismaken<span style="color: var(--accent);">.</span></h2>
+    <p class="section-sub fade-up">Amsterdam, NL &middot; Beschikbaar vanaf mei 2026</p>
+
+    <div class="contact-links fade-up">
+      <a href="mailto:jimivisser@gmail.com">jimivisser@gmail.com</a>
+      <a href="tel:+31618950069">+31 6 1895 0069</a>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Jimi Visser &middot; Amsterdam</p>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('open');
+    document.getElementById('menu').classList.toggle('open');
+    document.body.style.overflow = document.getElementById('menu').classList.contains('open') ? 'hidden' : '';
+  }
+</script>
+
+</body>
+</html>

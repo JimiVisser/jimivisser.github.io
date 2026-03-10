@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achtergrond &mdash; Jimi Visser &middot; Projectleider Online</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #111827;
+    --paper: #FAFAF7;
+    --accent: #B8963E;
+    --accent-light: #D4B263;
+    --muted: #6B7280;
+    --light-line: #D1D5DB;
+    --card-bg: #FFFFFF;
+    --card-border: #E5E7EB;
+    --tag-bg: #E5E7EB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    background: rgba(250, 250, 247, 0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  nav .nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav .logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  nav .logo span { color: var(--accent); }
+
+  nav .back-link {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav .back-link:hover { color: var(--accent); }
+  nav .back-link::before { content: '\2190 '; color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 7rem 2rem 3.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -100px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(184, 150, 62, 0.15);
+  }
+
+  .container { max-width: 900px; margin: 0 auto; }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 span { color: var(--accent); }
+
+  .hero .subtitle {
+    font-size: 1rem;
+    color: rgba(245, 240, 235, 0.55);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero .positioning {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(245, 240, 235, 0.7);
+    font-style: italic;
+    max-width: 680px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero .positioning strong {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding: 0.35rem 0.8rem;
+    border-radius: 3px;
+  }
+
+  .hero-badge.primary { background: var(--accent); color: #fff; }
+  .hero-badge.secondary { background: transparent; color: rgba(245,240,235,0.5); border: 1px solid rgba(245,240,235,0.2); }
+
+  /* ===== STATS ===== */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .stat { text-align: center; }
+
+  .stat-number {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+  }
+
+  /* ===== SECTIONS ===== */
+  section { padding: 3.5rem 2rem; }
+
+  .section-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  /* ===== EXPERIENCE ===== */
+  .exp-entry {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .exp-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .exp-role {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+  }
+
+  .exp-date {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .exp-company {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    padding: 0;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: #4A4540;
+    padding-left: 1rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+  }
+
+  .exp-bullets li::before {
+    content: '\2014';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ===== TWO COLUMN GRID ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  /* ===== CREDENTIALS ===== */
+  .cred-item { margin-bottom: 1.25rem; }
+  .cred-item:last-child { margin-bottom: 0; }
+
+  .cred-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .cred-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ===== TAGS ===== */
+  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    padding: 0.35rem 0.7rem;
+    background: var(--tag-bg);
+    border-radius: 3px;
+    color: #5A5549;
+  }
+
+  .tag.highlight { background: var(--accent); color: #fff; }
+
+  /* ===== AI CARDS ===== */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .ai-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ai-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--accent);
+  }
+
+  .ai-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .ai-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  /* ===== NOTABLE PROJECTS ===== */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+
+  .project-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-card .project-sub {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* ===== LANGUAGES ===== */
+  .lang-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .lang-item {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .lang-item strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--light-line);
+  }
+
+  footer p {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .ai-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    nav .back-link span { display: none; }
+    section { padding: 2.5rem 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .stats-bar { grid-template-columns: 1fr; }
+    .exp-header { flex-direction: column; }
+    .hero-badges { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="logo">Jimi Visser<span>.</span></a>
+    <a href="index.html" class="back-link"><span>Terug naar </span>home</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <h1>Achtergrond<span>.</span></h1>
+    <div class="subtitle">Projectleider &middot; Account Manager &middot; Producent</div>
+    <p class="positioning">Projectleider met ervaring in <strong>account management, productie en digitale communicatie</strong>. Bij Ogilvy leid ik internationale klantprojecten en verbeter ik werkprocessen met AI-tools. Daarvoor groeide ik bij DPPLR in vier jaar van Producer naar leidinggevende rol. Ik combineer <strong>planmatig werken met de flexibiliteit</strong> die nodig is in complexe organisaties.</p>
+    <div class="hero-badges">
+      <span class="hero-badge primary">Cannes Lions '20</span>
+      <span class="hero-badge secondary">NIMA B Marketing</span>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding-bottom: 0;">
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat">
+        <div class="stat-number">6+</div>
+        <div class="stat-label">Jaar projectervaring</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">25</div>
+        <div class="stat-label">Grootste team</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">&euro;850K</div>
+        <div class="stat-label">Grootste projectbudget</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">3x</div>
+        <div class="stat-label">Promotie in 4 jaar</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section>
+  <div class="container">
+    <div class="section-label">Werkervaring</div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <div class="exp-role">Account Manager</div>
+        <div class="exp-date">Nov 2024 &mdash; Heden</div>
+      </div>
+      <div class="exp-company">Ogilvy Amsterdam (250+ medewerkers)</div>
+      <ul class="exp-bullets">
+        <li>Verantwoordelijk voor de complete projectoplevering van internationale accounts, inclusief afstemming met klanten in Zuid-Korea en een hub in Singapore</li>
+        <li>Twee campagnes die werden opgepikt door internationale vakpers (LBBOnline, Famous Campaigns, Roastbrief): Loods 5 'Showroom on Ice' en Testicular Cancer Foundation</li>
+        <li>AI-tools ingezet om briefings, rapportages en terugkerende werkzaamheden sneller af te handelen, waardoor doorlooptijden zichtbaar korter werden</li>
+        <li>Dagelijkse samenwerking met creatief, strategie, productie en media binnen een matrixorganisatie</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <div class="exp-role">Producer &rarr; EP &rarr; Creative Dev. &amp; Growth</div>
+        <div class="exp-date">Sep 2020 &mdash; Nov 2024</div>
+      </div>
+      <div class="exp-company">DPPLR</div>
+      <ul class="exp-bullets">
+        <li>Drie keer doorgegroeid in vier jaar: van Producer naar Executive Producer naar Creative Development &amp; Growth</li>
+        <li>Leiding gegeven aan teams tot 6 directe medewerkers intern, en crews tot 25 man op locatie. Budgetverantwoordelijkheid tot &euro;850K per project</li>
+        <li>Executive Producer van speelfilm 'Alice': volledige projectleiding van pre-productie tot oplevering (5 maanden)</li>
+        <li>Nieuwe business binnengehaald via upselling bij bestaande klanten en actieve acquisitie</li>
+        <li>Projectmanagement- en opvolgsystemen ingevoerd die doorlooptijden met ~30% verkortten</li>
+      </ul>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-header">
+        <div class="exp-role">Freelance Producent &amp; Consultant</div>
+        <div class="exp-date">2019 &mdash; 2021</div>
+      </div>
+      <div class="exp-company">BEP+Schnitzel &middot; Ad.Business &middot; Google (via Cannes Lions Roger Hatchuel Academy)</div>
+      <ul class="exp-bullets">
+        <li>Productiemanagement voor meerdere klanten. Als Nederlandse vertegenwoordiger bij Cannes Lions 2020 een strategisch concept ontwikkeld voor Google</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION + CERTS + SKILLS -->
+<section style="background: #fff; border-top: 1px solid var(--light-line); border-bottom: 1px solid var(--light-line);">
+  <div class="container">
+    <div class="two-col">
+
+      <div>
+        <div class="section-label">Opleiding</div>
+        <div class="cred-item">
+          <div class="cred-title">Marketing &amp; Communicatie (Bachelor, HBO)</div>
+          <div class="cred-sub">The New School Amsterdam</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-title">VWO NG/NT</div>
+          <div class="cred-sub">Sint-Nicolaas Lyceum</div>
+        </div>
+
+        <div class="section-label" style="margin-top: 2.5rem;">Certificeringen</div>
+        <div class="cred-item">
+          <div class="cred-title">NIMA A &amp; NIMA B Marketing</div>
+          <div class="cred-sub">Netherlands Institute of Marketing &mdash; EMC-geaccrediteerd (EQF Level 6)</div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-title">Cambridge CPE (C2 Proficiency)</div>
+          <div class="cred-sub">Certificering Engels op moedertaalniveau</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Competenties</div>
+        <div class="tags">
+          <span class="tag highlight">Projectleiding</span>
+          <span class="tag highlight">Online &amp; Digitaal</span>
+          <span class="tag">Planning &amp; Roadmaps</span>
+          <span class="tag">Voortgangsrapportage</span>
+          <span class="tag">Stakeholdermanagement</span>
+          <span class="tag">Contentstrategie</span>
+          <span class="tag">Budgetbeheer (&euro;850K+)</span>
+          <span class="tag">Teamleiding (6 direct)</span>
+          <span class="tag">Cross-functioneel werken</span>
+          <span class="tag">AI Tools &amp; Automatisering</span>
+          <span class="tag">Business Development</span>
+          <span class="tag">Productiemanagement</span>
+        </div>
+
+        <div class="section-label" style="margin-top: 2.5rem;">Klanten</div>
+        <div class="tags">
+          <span class="tag">Ford</span>
+          <span class="tag">AkzoNobel</span>
+          <span class="tag">CJ CheilJedang (Bibigo)</span>
+          <span class="tag">Loods 5</span>
+          <span class="tag">Unilever (Prodent, Zwitsal)</span>
+          <span class="tag">Google</span>
+        </div>
+
+        <div class="section-label" style="margin-top: 2.5rem;">Talen</div>
+        <div class="lang-row">
+          <div class="lang-item"><strong>Nederlands</strong> Moedertaal</div>
+          <div class="lang-item"><strong>Engels</strong> C2 (CPE)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- DIGITAL SKILLS -->
+<section>
+  <div class="container">
+    <div class="section-label">Digitale vaardigheden</div>
+    <div class="ai-grid">
+      <div class="ai-card">
+        <h4>AI &amp; Automatisering</h4>
+        <p>Zet AI-tools (Claude, GPT) in voor briefings, rapportages en terugkerende taken. Bouw zelf applicaties met AI-assisted development.</p>
+      </div>
+      <div class="ai-card">
+        <h4>Online Projecten</h4>
+        <p>Ervaring met digitale campagnes, contentstrategieen en online platformen. Snap de technische kant en kan schakelen tussen UX, ICT en communicatie.</p>
+      </div>
+      <div class="ai-card">
+        <h4>Procesverbetering</h4>
+        <p>Werkprocessen en opvolgsystemen ingevoerd die doorlooptijden verkorten. Combineer planning en tools om projecten strakker te laten lopen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTABLE PROJECTS -->
+<section style="background: #fff; border-top: 1px solid var(--light-line); border-bottom: 1px solid var(--light-line);">
+  <div class="container">
+    <div class="section-label">Projecten</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h4>Cannes Lions Roger Hatchuel Academy</h4>
+        <div class="project-sub">2020 &middot; Nederlandse vertegenwoordiger</div>
+        <p>Internationaal programma voor jonge creatieve leiders. Strategisch project uitgevoerd voor Google.</p>
+      </div>
+      <div class="project-card">
+        <h4>Epica Creative Circles</h4>
+        <div class="project-sub">2020 &middot; Concept &amp; Identity</div>
+        <p>Marketingcommunicatie en huisstijl ontworpen voor het congres voorafgaand aan de Epica Awards.</p>
+      </div>
+      <div class="project-card">
+        <h4>Speelfilm: 'Alice'</h4>
+        <div class="project-sub">2023 &middot; Executive Producer bij DPPLR</div>
+        <p>Volledige projectleiding van een speelfilm: cast, crew, budget en postproductie over 5 maanden.</p>
+      </div>
+      <div class="project-card">
+        <h4>Future of Education</h4>
+        <div class="project-sub">Business School Berlijn/Hamburg</div>
+        <p>Internationaal programma over digitalisering in onderwijs. Platform gecreeerd dat studenten en bedrijven verbindt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 Jimi Visser &middot; Amsterdam</p>
+</footer>
+
+</body>
+</html>
