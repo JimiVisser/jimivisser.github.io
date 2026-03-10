@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cover Letter — Jimi Visser &middot; Monks</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+
+  :root {
+    --ink: #111827;
+    --paper: #FAFAF7;
+    --accent: #B8963E;
+    --accent-light: #D4B263;
+    --muted: #6B7280;
+    --light-line: #D1D5DB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ===== HEADER ===== */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 3.5rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -60px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    border: 1px solid rgba(184, 150, 62, 0.1);
+  }
+
+  .header-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 0.35rem;
+  }
+
+  .header h1 span { color: var(--accent); }
+
+  .header .subtitle {
+    font-size: 0.9rem;
+    color: rgba(245, 240, 235, 0.5);
+    margin-bottom: 1rem;
+  }
+
+  .header-contact {
+    display: flex;
+    gap: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    color: rgba(245, 240, 235, 0.4);
+    letter-spacing: 0.3px;
+    flex-wrap: wrap;
+  }
+
+  .header-contact span::before {
+    content: '\2192 ';
+    color: var(--accent);
+  }
+
+  .header-role {
+    text-align: right;
+  }
+
+  .header-role .applying {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+
+  .header-role .role-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(245, 240, 235, 0.85);
+    line-height: 1.3;
+  }
+
+  .header-role .role-company {
+    font-size: 0.85rem;
+    color: rgba(245, 240, 235, 0.45);
+  }
+
+  /* ===== DATE & ADDRESSEE ===== */
+  .meta {
+    padding: 2rem 3.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .meta .date {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .meta .addressee {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ===== LETTER BODY ===== */
+  .letter {
+    padding: 2rem 3.5rem 3rem;
+    flex: 1;
+  }
+
+  .letter .greeting {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+
+  .letter p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: #3A3630;
+    margin-bottom: 1.25rem;
+    max-width: 640px;
+  }
+
+  .letter p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .letter .accent-text {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  /* Highlight strip */
+  .highlights {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.75rem 0;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid var(--light-line);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .highlights::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, var(--accent), var(--accent-light));
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .highlight-item::before {
+    content: '\2014';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .highlight-item span {
+    font-size: 0.85rem;
+    color: #4A4540;
+    line-height: 1.5;
+  }
+
+  .letter .sign-off {
+    margin-top: 2rem;
+    font-size: 0.92rem;
+    color: #3A3630;
+    line-height: 1.8;
+  }
+
+  .letter .signature {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 0.5rem;
+  }
+
+  /* ===== FOOTER ===== */
+  .letter-footer {
+    padding: 1.5rem 3.5rem;
+    border-top: 1px solid var(--light-line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .letter-footer .links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .letter-footer a {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.3px;
+  }
+
+  .letter-footer a::before {
+    content: '\2192 ';
+  }
+
+  .letter-footer .note {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .header { padding: 2rem 1.5rem; }
+    .header-grid { flex-direction: column; gap: 1rem; }
+    .header-role { text-align: left; }
+    .meta { padding: 1.5rem; flex-direction: column; gap: 0.5rem; }
+    .meta .addressee { text-align: left; }
+    .letter { padding: 1.5rem; }
+    .highlights { grid-template-columns: 1fr; }
+    .letter-footer { padding: 1.5rem; flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+  }
+
+  /* ===== PRINT ===== */
+  @media print {
+    body { background: white; }
+    .page { max-width: none; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-grid">
+      <div>
+        <h1>Jimi Visser<span>.</span></h1>
+        <div class="subtitle">Account Manager &middot; AI Project Lead &middot; Creative Producer</div>
+        <div class="header-contact">
+          <span>jimivisser@gmail.com</span>
+          <span>+31 6 1895 0069</span>
+          <span>Amsterdam, NL</span>
+        </div>
+      </div>
+      <div class="header-role">
+        <div class="applying">Applying for</div>
+        <div class="role-title">Account Manager<br>(Project Lead) AI</div>
+        <div class="role-company">Monks &middot; Amsterdam</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- META -->
+  <div class="meta">
+    <div class="date">10 March 2026</div>
+    <div class="addressee">
+      Sander Stomph<br>
+      Monks, Amsterdam
+    </div>
+  </div>
+
+  <!-- LETTER -->
+  <div class="letter">
+
+    <div class="greeting">Dear Sander,</div>
+
+    <p>I understood I should reach out to you directly for the <strong>Account Manager (Project Lead) AI</strong> role. I'm excited about this position because it sits exactly at the intersection of what I do best: <span class="accent-text">managing client delivery</span> and <span class="accent-text">putting AI to work</span> in real operations.</p>
+
+    <p>At <strong>Ogilvy Amsterdam</strong>, I own end-to-end delivery for CJ CheilJedang (Bibigo) &mdash; a cross-market account I built from scratch, coordinating between a South Korean client, an APAC hub in Singapore, and local production teams. Two of my recent campaigns were featured in international press, including the Loods 5 'Showroom on Ice' campaign (30% sales uplift, 2.8M reach) and a guerrilla campaign for the Testicular Cancer Foundation.</p>
+
+    <p>What sets me apart is that I don't just use AI tools &mdash; I build with them. I've automated briefing, reporting, and performance tracking workflows using Claude at Ogilvy. Outside of work, I'm building a media startup (Studio 1104) and shipped my first app, both using AI-assisted development. I'm currently completing my Anthropic Claude certification.</p>
+
+    <div class="highlights">
+      <div class="highlight-item"><span>End-to-end client delivery across international markets</span></div>
+      <div class="highlight-item"><span>AI adoption in live account operations</span></div>
+      <div class="highlight-item"><span>3x promoted in 4 years at previous role (DPPLR)</span></div>
+      <div class="highlight-item"><span>Managed budgets up to &euro;850K and teams of 25</span></div>
+      <div class="highlight-item"><span>Business development through upselling and prospecting</span></div>
+      <div class="highlight-item"><span>Builder mindset: ventures, apps, and AI workflows</span></div>
+    </div>
+
+    <p>Before Ogilvy, I spent four years at production company DPPLR, where I was promoted three times &mdash; from Producer to Executive Producer to Creative Development &amp; Growth lead. I built new business pipelines, introduced delivery systems that reduced turnaround times by 30%, and executive produced a feature film. This track record of growing accounts and improving operations is something I'd bring directly to the Monks client portfolio.</p>
+
+    <p>I'd welcome the chance to discuss how my experience in client delivery, AI integration, and business development can contribute to Monks' ambitions. I'm available at your convenience.</p>
+
+    <div class="sign-off">
+      With kind regards,
+      <div class="signature">Jimi Visser</div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="letter-footer">
+    <div class="links">
+      <a href="https://jimivisser.github.io" target="_blank">jimivisser.github.io</a>
+      <a href="https://jimivisser.github.io/cv.html" target="_blank">Background</a>
+      <a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank">LinkedIn</a>
+    </div>
+    <div class="note">Amsterdam, NL &middot; 2026</div>
+  </div>
+
+</div>
+
+</body>
+</html>
