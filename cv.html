@@ -5,18 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Background — Jimi Visser</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
 
   :root {
     --ink: #111827;
     --paper: #FAFAF7;
     --accent: #B8963E;
     --accent-light: #D4B263;
+    --accent-glow: rgba(184, 150, 62, 0.12);
     --muted: #6B7280;
-    --light-line: #D1D5DB;
-    --card-bg: #FFFFFF;
-    --card-border: #E5E7EB;
-    --tag-bg: #E5E7EB;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,553 +21,777 @@
 
   body {
     font-family: 'Manrope', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--ink);
+    color: var(--paper);
     line-height: 1.6;
+    overflow-x: hidden;
   }
 
-  /* ===== NAV ===== */
+  /* ===== GRAIN ===== */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    pointer-events: none;
+  }
+  .grain canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-in { opacity: 0; transition: opacity 0.9s ease; }
+  .fade-in.visible { opacity: 1; }
+  .stagger-1 { transition-delay: 0.05s; }
+  .stagger-2 { transition-delay: 0.12s; }
+  .stagger-3 { transition-delay: 0.2s; }
+  .stagger-4 { transition-delay: 0.28s; }
+  .stagger-5 { transition-delay: 0.36s; }
+
+  /* ===== NAV PILL ===== */
   nav {
     position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1rem 2rem;
-    background: rgba(250, 250, 247, 0.9);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--light-line);
-  }
-
-  nav .nav-inner {
-    max-width: 900px;
-    margin: 0 auto;
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.65rem;
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.07);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.07);
+    white-space: nowrap;
   }
 
-  nav .logo {
+  .nav-logo {
     font-family: 'Fraunces', serif;
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--paper);
     text-decoration: none;
-    color: var(--ink);
+    padding: 0.3rem 0.75rem;
+    letter-spacing: -0.3px;
+  }
+  .nav-logo span { color: var(--accent); }
+
+  .nav-divider {
+    width: 1px;
+    height: 18px;
+    background: rgba(255,255,255,0.1);
+    margin: 0 0.15rem;
   }
 
-  nav .logo span { color: var(--accent); }
-
-  nav .back-link {
+  .back-link {
     font-family: 'Fira Code', monospace;
-    font-size: 0.8rem;
-    color: var(--muted);
+    font-size: 0.72rem;
+    color: rgba(250,250,247,0.5);
     text-decoration: none;
-    transition: color 0.2s;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    transition: all 0.25s;
   }
+  .back-link:hover {
+    color: var(--paper);
+    background: rgba(255,255,255,0.06);
+  }
+  .back-link::before { content: '← '; color: var(--accent); }
 
-  nav .back-link:hover { color: var(--accent); }
-  nav .back-link::before { content: '\2190 '; color: var(--accent); }
+  /* ===== CONTAINER ===== */
+  .container { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
 
   /* ===== HERO ===== */
   .hero {
-    background: var(--ink);
-    color: var(--paper);
-    padding: 7rem 2rem 3.5rem;
+    min-height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 9rem 2rem 5rem;
     position: relative;
     overflow: hidden;
+    background: var(--ink);
   }
 
-  .hero::after {
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 80% 10%, rgba(184, 150, 62, 0.07) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 60% at 10% 90%, rgba(184, 150, 62, 0.03) 0%, transparent 55%);
+    pointer-events: none;
+    animation: hero-breathe 14s ease-in-out infinite alternate;
+  }
+  @keyframes hero-breathe {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+  }
+
+  .hero-streak {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hero-streak::before {
     content: '';
     position: absolute;
-    top: -100px; right: -80px;
-    width: 320px; height: 320px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(184, 150, 62, 0.15);
+    top: -50%;
+    left: -100%;
+    width: 55%;
+    height: 200%;
+    background: linear-gradient(
+      108deg,
+      transparent 0%, transparent 42%,
+      rgba(184,150,62,0.03) 46%,
+      rgba(255,255,255,0.045) 50%,
+      rgba(184,150,62,0.03) 54%,
+      transparent 58%, transparent 100%
+    );
+    animation: streak-sweep 10s cubic-bezier(0.4,0,0.6,1) infinite;
+    animation-delay: 2s;
+  }
+  @keyframes streak-sweep {
+    0%   { transform: translateX(-5%);  opacity: 0; }
+    8%   { opacity: 1; }
+    88%  { opacity: 1; }
+    100% { transform: translateX(290%); opacity: 0; }
   }
 
-  .container { max-width: 900px; margin: 0 auto; }
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(184,150,62,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,150,62,0.018) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse 60% 55% at 75% 20%, rgba(0,0,0,0.8) 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 55% at 75% 20%, rgba(0,0,0,0.8) 0%, transparent 70%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
 
   .hero h1 {
     font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.15;
-    margin-bottom: 0.5rem;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero h1 span { color: var(--accent); }
-
-  .hero .subtitle {
-    font-size: 1rem;
-    color: rgba(245, 240, 235, 0.55);
+    letter-spacing: -3px;
+    line-height: 1.02;
     margin-bottom: 1.5rem;
     position: relative;
     z-index: 1;
   }
-
-  .hero .positioning {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: rgba(245, 240, 235, 0.7);
+  .hero h1 em {
     font-style: italic;
-    max-width: 680px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero .positioning strong {
-    font-style: normal;
+    font-weight: 300;
     color: var(--accent);
-    font-weight: 600;
   }
 
-  .hero-badges {
+  .hero-bio {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: rgba(250,250,247,0.5);
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
+  }
+  .hero-bio strong { color: rgba(250,250,247,0.82); font-weight: 600; }
+
+  .hero-chips {
     display: flex;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
     flex-wrap: wrap;
+    gap: 0.5rem;
     position: relative;
     z-index: 1;
   }
-
-  .hero-badge {
+  .hero-chip {
     font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    padding: 0.35rem 0.8rem;
-    border-radius: 3px;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    padding: 0.35rem 0.85rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(250,250,247,0.55);
+    backdrop-filter: blur(12px);
+  }
+  .hero-chip.gold {
+    background: rgba(184,150,62,0.12);
+    border-color: rgba(184,150,62,0.3);
+    color: var(--accent-light);
   }
 
-  .hero-badge.primary { background: var(--accent); color: #fff; }
-  .hero-badge.secondary { background: transparent; color: rgba(245,240,235,0.5); border: 1px solid rgba(245,240,235,0.2); }
-
-  /* ===== STATS ===== */
-  .stats-bar {
+  /* ===== STATS GLASS PANEL ===== */
+  .stats-wrap {
+    padding: 0 2rem 4rem;
+  }
+  .stats-glass {
+    max-width: 920px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--light-line);
+    background: rgba(255,255,255,0.028);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.06);
+    overflow: hidden;
   }
-
-  .stat { text-align: center; }
-
+  .stat-item {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.05);
+  }
+  .stat-item:last-child { border-right: none; }
   .stat-number {
     font-family: 'Fraunces', serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     color: var(--accent);
     line-height: 1;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.4rem;
+    letter-spacing: -1px;
   }
-
   .stat-label {
     font-family: 'Fira Code', monospace;
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--muted);
+    letter-spacing: 0.1em;
+    color: rgba(250,250,247,0.3);
   }
 
-  /* ===== SECTIONS ===== */
-  section { padding: 3.5rem 2rem; }
+  /* ===== SECTION COMMON ===== */
+  .cv-section {
+    padding: 5rem 2rem;
+    position: relative;
+  }
+  .cv-section + .cv-section {
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
 
-  .section-label {
+  .section-eyebrow {
     font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    letter-spacing: 2.5px;
     color: var(--accent);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
+  }
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin-bottom: 3rem;
+  }
+  .section-title em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
   }
 
-  /* ===== EXPERIENCE ===== */
-  .exp-entry {
-    margin-bottom: 2.5rem;
-    padding-bottom: 2.5rem;
-    border-bottom: 1px solid var(--light-line);
+  /* ===== EXPERIENCE TIMELINE ===== */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent) 0%, rgba(184,150,62,0.2) 60%, transparent 100%);
   }
 
-  .exp-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .timeline-entry {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  .timeline-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2.4rem;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184,150,62,0.15), 0 0 12px rgba(184,150,62,0.3);
+  }
 
   .exp-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 0.25rem;
+    gap: 1rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    margin-bottom: 0.2rem;
   }
-
   .exp-role {
     font-family: 'Fraunces', serif;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 600;
-    letter-spacing: -0.3px;
+    letter-spacing: -0.5px;
   }
-
   .exp-date {
     font-family: 'Fira Code', monospace;
-    font-size: 0.75rem;
-    color: var(--muted);
-    letter-spacing: 0.5px;
+    font-size: 0.72rem;
+    color: rgba(250,250,247,0.35);
+    letter-spacing: 0.05em;
+    white-space: nowrap;
   }
-
   .exp-company {
-    font-size: 0.9rem;
-    color: var(--muted);
-    margin-bottom: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    opacity: 0.85;
   }
-
   .exp-bullets {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
-
   .exp-bullets li {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
     line-height: 1.65;
-    color: #4A4540;
-    padding-left: 1rem;
+    color: rgba(250,250,247,0.55);
+    padding-left: 1.2rem;
     position: relative;
-    margin-bottom: 0.4rem;
   }
-
   .exp-bullets li::before {
-    content: '\2014';
+    content: '—';
     position: absolute;
     left: 0;
     color: var(--accent);
-    font-weight: 700;
+    opacity: 0.6;
   }
+  .exp-bullets li strong { color: rgba(250,250,247,0.82); font-weight: 600; }
 
-  /* ===== TWO COLUMN GRID ===== */
-  .two-col {
+  /* ===== GLASS CARD ===== */
+  .glass-card {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.45s cubic-bezier(0.16,1,0.3,1);
+    box-shadow: 0 4px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(184,150,62,0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.45s;
+  }
+  .glass-card:hover { border-color: rgba(184,150,62,0.2); box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(184,150,62,0.08), inset 0 1px 0 rgba(255,255,255,0.08); }
+  .glass-card:hover::before { opacity: 1; }
+
+  /* ===== CRED / EDU GRID ===== */
+  .cred-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 1.5rem;
   }
 
-  /* ===== CREDENTIALS ===== */
-  .cred-item { margin-bottom: 1.25rem; }
-  .cred-item:last-child { margin-bottom: 0; }
+  .cred-col-title {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(250,250,247,0.3);
+    margin-bottom: 1.25rem;
+  }
 
+  .cred-entry {
+    margin-bottom: 1.25rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .cred-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
   .cred-title {
     font-size: 0.95rem;
     font-weight: 600;
+    color: rgba(250,250,247,0.85);
+    margin-bottom: 0.2rem;
   }
-
   .cred-sub {
-    font-size: 0.85rem;
-    color: var(--muted);
+    font-size: 0.82rem;
+    color: rgba(250,250,247,0.38);
     line-height: 1.5;
   }
 
   /* ===== TAGS ===== */
-  .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.25rem; }
   .tag {
     font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.5px;
-    padding: 0.35rem 0.7rem;
-    background: var(--tag-bg);
-    border-radius: 3px;
-    color: #5A5549;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    padding: 0.28rem 0.65rem;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(250,250,247,0.45);
+  }
+  .tag.gold {
+    background: rgba(184,150,62,0.1);
+    border-color: rgba(184,150,62,0.25);
+    color: var(--accent-light);
   }
 
-  .tag.highlight { background: var(--accent); color: #fff; }
-
-  /* ===== AI CARDS ===== */
+  /* ===== AI GRID ===== */
   .ai-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.25rem;
-    margin-top: 1.5rem;
   }
-
-  .ai-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 1.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .ai-card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 3px;
-    background: var(--accent);
-  }
-
   .ai-card h4 {
-    font-size: 0.95rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--paper);
+    margin-bottom: 0.6rem;
   }
-
   .ai-card p {
     font-size: 0.85rem;
-    line-height: 1.6;
-    color: var(--muted);
+    line-height: 1.65;
+    color: rgba(250,250,247,0.45);
+  }
+  .ai-icon {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    opacity: 0.8;
   }
 
-  /* ===== NOTABLE PROJECTS ===== */
+  /* ===== PROJECTS GRID ===== */
   .projects-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
-    margin-top: 1.5rem;
   }
-
-  .project-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 1.5rem;
-  }
-
-  .project-card h4 {
-    font-size: 0.95rem;
+  .proj-card-num {
+    font-family: 'Fraunces', serif;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 0.25rem;
+    color: rgba(184,150,62,0.15);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    letter-spacing: -1px;
   }
-
-  .project-card .project-sub {
+  .proj-card-sub {
     font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
-    color: var(--accent);
+    font-size: 0.67rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    color: var(--accent);
+    opacity: 0.75;
+    margin-bottom: 0.4rem;
   }
-
-  .project-card p {
-    font-size: 0.85rem;
-    line-height: 1.55;
-    color: var(--muted);
-  }
-
-  /* ===== LANGUAGES ===== */
-  .lang-row {
-    display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
-  }
-
-  .lang-item {
-    font-size: 0.9rem;
-    color: var(--muted);
-  }
-
-  .lang-item strong {
-    color: var(--ink);
+  .proj-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
     font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--paper);
+    margin-bottom: 0.6rem;
+  }
+  .proj-card-body {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(250,250,247,0.45);
+  }
+
+  /* ===== DARK ACCENT SECTION ===== */
+  .dark-section {
+    background: rgba(0,0,0,0.25);
   }
 
   /* ===== FOOTER ===== */
   footer {
-    padding: 2.5rem 2rem;
+    padding: 3rem 2rem;
     text-align: center;
-    border-top: 1px solid var(--light-line);
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
-
+  .footer-logo {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--paper);
+    margin-bottom: 0.75rem;
+  }
+  .footer-logo span { color: var(--accent); }
   footer p {
     font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.5px;
+    font-size: 0.68rem;
+    color: rgba(250,250,247,0.25);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
   }
-
-  footer .status {
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-family: 'Manrope', sans-serif;
+  footer a {
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
   }
+  footer a:hover { opacity: 1; }
 
   /* ===== RESPONSIVE ===== */
   @media (max-width: 768px) {
-    .stats-bar { grid-template-columns: repeat(2, 1fr); }
-    .two-col { grid-template-columns: 1fr; }
+    .stats-glass { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .stat-item:nth-child(2), .stat-item:last-child { border-bottom: none; }
+    .cred-grid { grid-template-columns: 1fr; }
     .ai-grid { grid-template-columns: 1fr; }
     .projects-grid { grid-template-columns: 1fr; }
-    nav .back-link span { display: none; }
-    section { padding: 2.5rem 1.5rem; }
+    .timeline { padding-left: 1.5rem; }
+    .hero { padding: 8rem 1.5rem 4rem; }
+    .cv-section { padding: 4rem 1.5rem; }
+    .stats-wrap { padding: 0 1.5rem 3rem; }
   }
-
   @media (max-width: 480px) {
-    .stats-bar { grid-template-columns: 1fr; }
-    .exp-header { flex-direction: column; }
-    .hero-badges { flex-direction: column; }
+    .stats-glass { grid-template-columns: 1fr; }
+    .stat-item { border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .stat-item:last-child { border-bottom: none; }
+    .exp-header { flex-direction: column; gap: 0.25rem; }
+    .hero h1 { letter-spacing: -2px; }
   }
 </style>
 </head>
 <body>
 
+<div class="grain" aria-hidden="true"></div>
+
 <!-- NAV -->
 <nav>
-  <div class="nav-inner">
-    <a href="index.html" class="logo">Jimi Visser<span>.</span></a>
-    <a href="index.html" class="back-link"><span>Back to </span>home</a>
-  </div>
+  <a href="index.html" class="nav-logo">Jimi Visser<span>.</span></a>
+  <div class="nav-divider"></div>
+  <a href="index.html" class="back-link">Portfolio</a>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="container">
-    <h1>Background<span>.</span></h1>
-    <div class="subtitle">Account Manager &middot; AI Project Lead &middot; Creative Producer</div>
-    <p class="positioning">Account manager who bridges <strong>strategy, creative, and production</strong> with an AI-first mindset. At Ogilvy I lead cross-market client delivery and drive AI adoption across workflows. On the side I build ventures from scratch &mdash; scaling teams to 25, managing &euro;850K budgets, and shipping my first app. I bring the same instinct everywhere: <strong>own the delivery, automate what slows it down, grow the relationship</strong>.</p>
-    <div class="hero-badges">
-      <span class="hero-badge primary">Cannes Lions '20</span>
-      <span class="hero-badge secondary">Claude Certified (in progress)</span>
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-streak" aria-hidden="true"></div>
+  <div class="container" style="position: relative; z-index: 1; width: 100%;">
+    <div class="hero-eyebrow fade-in">Background &amp; Experience</div>
+    <h1 class="fade-up stagger-1">The<br><em>full picture</em>.</h1>
+    <p class="hero-bio fade-up stagger-2">Account manager who bridges <strong>strategy, creative, and production</strong> with an AI-first mindset. At Ogilvy I lead cross-market client delivery and drive AI adoption across workflows. On the side I build ventures from scratch &mdash; scaling crews to 25, managing &euro;850K budgets, shipping my first app.</p>
+    <div class="hero-chips fade-up stagger-3">
+      <span class="hero-chip gold">Cannes Lions '20</span>
+      <span class="hero-chip">NIMA B Certified</span>
+      <span class="hero-chip">Cambridge C2 English</span>
+      <span class="hero-chip">Claude AI (in progress)</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-wrap">
+  <div class="stats-glass">
+    <div class="stat-item fade-up stagger-1">
+      <div class="stat-number" data-target="850" data-prefix="€" data-suffix="K">€0K</div>
+      <div class="stat-label">Single project budget</div>
+    </div>
+    <div class="stat-item fade-up stagger-2">
+      <div class="stat-number" data-target="25">0</div>
+      <div class="stat-label">Production crew managed</div>
+    </div>
+    <div class="stat-item fade-up stagger-3">
+      <div class="stat-number" data-target="6">0</div>
+      <div class="stat-label">Direct reports led</div>
+    </div>
+    <div class="stat-item fade-up stagger-4">
+      <div class="stat-number" data-target="4">0</div>
+      <div class="stat-label">Years at DPPLR</div>
     </div>
   </div>
 </div>
 
-<!-- STATS -->
-<section style="padding-bottom: 0;">
-  <div class="container">
-    <div class="stats-bar">
-      <div class="stat">
-        <div class="stat-number">&euro;850K</div>
-        <div class="stat-label">Single project budget</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">25</div>
-        <div class="stat-label">Production crew managed</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">6</div>
-        <div class="stat-label">Direct reports led</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">3</div>
-        <div class="stat-label">Ventures &amp; side projects</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- EXPERIENCE -->
-<section>
+<section class="cv-section">
   <div class="container">
-    <div class="section-label">Experience</div>
+    <div class="section-eyebrow fade-up">Work History</div>
+    <h2 class="section-title fade-up">Experience</h2>
 
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role">Account Manager</div>
-        <div class="exp-date">Nov 2024 &mdash; Present</div>
-      </div>
-      <div class="exp-company">Ogilvy Amsterdam</div>
-      <ul class="exp-bullets">
-        <li>Own end-to-end client delivery for CJ CheilJedang (Bibigo) &mdash; built account structure from scratch, coordinating across South Korean client, APAC hub in Singapore, and local production</li>
-        <li>Two campaigns featured in international press (LBBOnline, Famous Campaigns, Roastbrief): Loods 5 'Showroom on Ice' (30% sales uplift, 2.8M reach) and Testicular Cancer Foundation</li>
-        <li>Leading AI adoption across account operations &mdash; automated briefing, reporting, and performance tracking using Claude, cutting turnaround times on recurring deliverables</li>
-      </ul>
-    </div>
+    <div class="timeline">
 
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role">Producer &rarr; EP &rarr; Creative Dev. &amp; Growth</div>
-        <div class="exp-date">Sep 2020 &mdash; Nov 2024</div>
+      <div class="timeline-entry fade-up stagger-1">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">Account Manager</div>
+          <div class="exp-date">Nov 2024 — Present</div>
+        </div>
+        <div class="exp-company">Ogilvy Amsterdam</div>
+        <ul class="exp-bullets">
+          <li>Own end-to-end client delivery for CJ CheilJedang (Bibigo) — built account structure from scratch, coordinating across South Korean client, APAC hub in Singapore, and local production</li>
+          <li><strong>Two campaigns in international press</strong> (LBBOnline, Famous Campaigns, Roastbrief): Loods 5 'Showroom on Ice' (30% sales uplift, 2.8M reach) and Testicular Cancer Foundation</li>
+          <li>Leading AI adoption across account operations — automated briefing, reporting, and performance tracking using Claude, cutting turnaround times on recurring deliverables</li>
+          <li>Account support on Ford (European localisation), Zwitsal, Prodent (Unilever), and AkzoNobel European brand playbooks</li>
+        </ul>
       </div>
-      <div class="exp-company">DPPLR</div>
-      <ul class="exp-bullets">
-        <li>Promoted 3x in 4 years: Producer &rarr; Executive Producer &rarr; Creative Development &amp; Growth lead</li>
-        <li>Led teams of up to 6 direct reports in-house and coordinated freelance crews of 25 on set; managed single-project budgets up to &euro;850K</li>
-        <li>Executive Produced feature film 'Alice' &mdash; overseeing full lifecycle from pre-production to delivery (Aug&ndash;Dec 2023)</li>
-        <li>Built new business pipeline through upselling existing clients and prospecting; led international shoots contributing directly to revenue growth</li>
-        <li>Introduced project management and delivery systems that reduced turnaround times by ~30% and improved SLA adherence</li>
-      </ul>
-    </div>
 
-    <div class="exp-entry">
-      <div class="exp-header">
-        <div class="exp-role">Freelance Producer &amp; Consultant</div>
-        <div class="exp-date">2019 &mdash; 2021</div>
+      <div class="timeline-entry fade-up stagger-2">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">Producer → EP → Creative Dev. &amp; Growth</div>
+          <div class="exp-date">Sep 2020 — Nov 2024</div>
+        </div>
+        <div class="exp-company">DPPLR</div>
+        <ul class="exp-bullets">
+          <li><strong>Promoted 3× in 4 years</strong>: Producer → Executive Producer → Creative Development &amp; Growth lead</li>
+          <li>Led teams of up to 6 direct reports in-house; coordinated freelance crews of 25 on set; managed single-project budgets up to <strong>€850K</strong></li>
+          <li>Executive Produced feature film 'Alice' — overseeing full lifecycle from pre-production to delivery across 5 months</li>
+          <li>Built new business pipeline through upselling existing clients and prospecting; led international shoots contributing directly to revenue growth</li>
+          <li>Introduced project management and delivery systems that reduced turnaround times by ~30% and improved SLA adherence</li>
+        </ul>
       </div>
-      <div class="exp-company">BEP+Schnitzel &middot; Ad.Business &middot; Google (via Cannes Lions Roger Hatchuel Academy)</div>
-      <ul class="exp-bullets">
-        <li>Production management across multiple clients; developed strategic concept for Google as NL representative at Cannes Lions 2020</li>
-      </ul>
+
+      <div class="timeline-entry fade-up stagger-3">
+        <div class="timeline-dot"></div>
+        <div class="exp-header">
+          <div class="exp-role">Freelance Producer &amp; Consultant</div>
+          <div class="exp-date">2019 — 2021</div>
+        </div>
+        <div class="exp-company">BEP+Schnitzel · Ad.Business · Google (via Cannes Lions)</div>
+        <ul class="exp-bullets">
+          <li>Production management across multiple clients; developed strategic concept for Google as Netherlands representative at Cannes Lions Roger Hatchuel Academy 2020</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- EDUCATION + CERTS + SKILLS -->
-<section style="background: #fff; border-top: 1px solid var(--light-line); border-bottom: 1px solid var(--light-line);">
+<!-- EDUCATION + SKILLS -->
+<section class="cv-section dark-section">
   <div class="container">
-    <div class="two-col">
+    <div class="section-eyebrow fade-up">Credentials</div>
+    <h2 class="section-title fade-up">Education &amp; <em>Skills</em></h2>
 
-      <div>
-        <div class="section-label">Education</div>
-        <div class="cred-item">
-          <div class="cred-title">Marketing &amp; Communication (Bachelor)</div>
-          <div class="cred-sub">The New School Amsterdam</div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-title">VWO NG/NT</div>
-          <div class="cred-sub">Sint-Nicolaas Lyceum</div>
+    <div class="cred-grid">
+
+      <div class="fade-up stagger-1">
+        <div class="glass-card" style="margin-bottom: 1.25rem;">
+          <div class="cred-col-title">Education</div>
+          <div class="cred-entry">
+            <div class="cred-title">Marketing &amp; Communication (Bachelor)</div>
+            <div class="cred-sub">The New School Amsterdam</div>
+          </div>
+          <div class="cred-entry">
+            <div class="cred-title">VWO NG/NT</div>
+            <div class="cred-sub">Sint-Nicolaas Lyceum</div>
+          </div>
         </div>
 
-        <div class="section-label" style="margin-top: 2.5rem;">Certifications</div>
-        <div class="cred-item">
-          <div class="cred-title">NIMA A &amp; NIMA B Marketing</div>
-          <div class="cred-sub">Netherlands Institute of Marketing &mdash; nationally recognised, EMC-accredited (EQF Level 6)</div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-title">Anthropic Claude Certification</div>
-          <div class="cred-sub">In progress via SkillJar &mdash; prompt engineering, API integration, AI workflow design</div>
-        </div>
-        <div class="cred-item">
-          <div class="cred-title">Cambridge CPE (C2 Proficiency)</div>
-          <div class="cred-sub">Native-level English certification</div>
+        <div class="glass-card">
+          <div class="cred-col-title">Certifications</div>
+          <div class="cred-entry">
+            <div class="cred-title">NIMA A &amp; NIMA B Marketing</div>
+            <div class="cred-sub">Netherlands Institute of Marketing — EMC-accredited, EQF Level 6</div>
+          </div>
+          <div class="cred-entry">
+            <div class="cred-title">Anthropic Claude Certification</div>
+            <div class="cred-sub">In progress via SkillJar — prompt engineering, API integration, AI workflow design</div>
+          </div>
+          <div class="cred-entry">
+            <div class="cred-title">Cambridge CPE (C2 Proficiency)</div>
+            <div class="cred-sub">Native-level English certification</div>
+          </div>
+          <div class="cred-entry">
+            <div class="cred-title">Languages</div>
+            <div class="cred-sub">English — Native (C2 CPE) &nbsp;·&nbsp; Dutch — Professional</div>
+          </div>
         </div>
       </div>
 
-      <div>
-        <div class="section-label">Core Capabilities</div>
-        <div class="tags">
-          <span class="tag highlight">AI Tools &amp; Automation</span>
-          <span class="tag highlight">Claude / LLM Workflows</span>
-          <span class="tag">Client Strategy</span>
-          <span class="tag">Project Delivery &amp; SLAs</span>
-          <span class="tag">Client Onboarding</span>
-          <span class="tag">Production Management</span>
-          <span class="tag">Budget Ownership (&euro;850K+)</span>
-          <span class="tag">Team Leadership (6 direct)</span>
-          <span class="tag">Stakeholder Management</span>
-          <span class="tag">Cross-Market Delivery</span>
-          <span class="tag">Pitch Development</span>
-          <span class="tag">App Development</span>
+      <div class="fade-up stagger-2">
+        <div class="glass-card" style="margin-bottom: 1.25rem;">
+          <div class="cred-col-title">Core Capabilities</div>
+          <div class="tags-wrap">
+            <span class="tag gold">AI Tools &amp; Automation</span>
+            <span class="tag gold">Claude / LLM Workflows</span>
+            <span class="tag">Client Strategy</span>
+            <span class="tag">Project Delivery &amp; SLAs</span>
+            <span class="tag">Client Onboarding</span>
+            <span class="tag">Production Management</span>
+            <span class="tag">Budget Ownership (€850K+)</span>
+            <span class="tag">Team Leadership (6 direct)</span>
+            <span class="tag">Stakeholder Management</span>
+            <span class="tag">Cross-Market Delivery</span>
+            <span class="tag">Pitch Development</span>
+            <span class="tag">App Development</span>
+          </div>
         </div>
 
-        <div class="section-label" style="margin-top: 2.5rem;">Key Clients</div>
-        <div class="tags">
-          <span class="tag">Ford</span>
-          <span class="tag">AkzoNobel</span>
-          <span class="tag">CJ CheilJedang (Bibigo)</span>
-          <span class="tag">Loods 5</span>
-          <span class="tag">Unilever (Prodent, Zwitsal)</span>
-          <span class="tag">Testicular Cancer Foundation</span>
-          <span class="tag">Google</span>
-        </div>
-
-        <div class="section-label" style="margin-top: 2.5rem;">Languages</div>
-        <div class="lang-row">
-          <div class="lang-item"><strong>English</strong> Native (C2 CPE)</div>
-          <div class="lang-item"><strong>Dutch</strong> Professional</div>
+        <div class="glass-card">
+          <div class="cred-col-title">Key Clients</div>
+          <div class="tags-wrap">
+            <span class="tag">Ford</span>
+            <span class="tag">AkzoNobel</span>
+            <span class="tag">CJ CheilJedang (Bibigo)</span>
+            <span class="tag">Unilever (Prodent, Zwitsal)</span>
+            <span class="tag">Loods 5</span>
+            <span class="tag">Testicular Cancer Foundation</span>
+            <span class="tag">A.Vogel</span>
+            <span class="tag">Klene</span>
+            <span class="tag">bol.com</span>
+            <span class="tag">DJI</span>
+            <span class="tag">Bridgefund</span>
+            <span class="tag">Google</span>
+          </div>
         </div>
       </div>
 
@@ -579,60 +800,155 @@
 </section>
 
 <!-- AI PROFICIENCY -->
-<section>
+<section class="cv-section">
   <div class="container">
-    <div class="section-label">AI Proficiency</div>
+    <div class="section-eyebrow fade-up">Technology</div>
+    <h2 class="section-title fade-up">AI <em>Proficiency</em></h2>
     <div class="ai-grid">
-      <div class="ai-card">
+      <div class="glass-card ai-card fade-up stagger-1">
+        <div class="ai-icon">// Prompting</div>
         <h4>Prompt Engineering</h4>
-        <p>Advanced prompting across Claude, GPT, and other LLMs. Pursuing official Anthropic Claude certification through SkillJar.</p>
+        <p>Advanced prompting across Claude, GPT, and other LLMs. Pursuing official Anthropic Claude certification. Building structured AI workflows for client-facing deliverables.</p>
       </div>
-      <div class="ai-card">
-        <h4>AI-Assisted Building</h4>
-        <p>Using Claude Code and AI tools to build functional applications &mdash; from concept to working product without a traditional dev background.</p>
+      <div class="glass-card ai-card fade-up stagger-2">
+        <div class="ai-icon">// Building</div>
+        <h4>AI-Assisted Development</h4>
+        <p>Using Claude Code to build functional applications from concept to working product — no traditional dev background. First self-built app: location-based social tool.</p>
       </div>
-      <div class="ai-card">
+      <div class="glass-card ai-card fade-up stagger-3">
+        <div class="ai-icon">// Automation</div>
         <h4>Workflow Automation</h4>
-        <p>Integrating AI into account management, client reporting, performance tracking, and production workflows to reduce manual overhead.</p>
+        <p>Integrating AI into account management, client reporting, performance tracking, and production workflows. Reduced manual overhead on recurring deliverables at Ogilvy.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- NOTABLE PROJECTS -->
-<section style="background: #fff; border-top: 1px solid var(--light-line); border-bottom: 1px solid var(--light-line);">
+<section class="cv-section dark-section">
   <div class="container">
-    <div class="section-label">Notable Projects</div>
+    <div class="section-eyebrow fade-up">Selected</div>
+    <h2 class="section-title fade-up">Notable <em>Projects</em></h2>
     <div class="projects-grid">
-      <div class="project-card">
-        <h4>Cannes Lions Roger Hatchuel Academy</h4>
-        <div class="project-sub">2020 &middot; Netherlands Representative</div>
-        <p>Global programme for next-gen creative leaders. Extended strategic project for Google on brand positioning.</p>
+
+      <div class="glass-card fade-up stagger-1">
+        <div class="proj-card-num">01</div>
+        <div class="proj-card-sub">2020 · Netherlands Representative</div>
+        <div class="proj-card-title">Cannes Lions Roger Hatchuel Academy</div>
+        <p class="proj-card-body">Global programme for next-gen creative leaders. Developed a strategic brand positioning project for Google as the sole Netherlands representative. <a href="https://www.canneslions.com/learning/academies/roger-hatchuel" target="_blank" rel="noopener" style="color: var(--accent); opacity: 0.7; text-decoration: none; font-size: 0.8rem;">Cannes Lions ↗</a></p>
       </div>
-      <div class="project-card">
-        <h4>Epica Creative Circles</h4>
-        <div class="project-sub">2020 &middot; Concept &amp; Identity Design</div>
-        <p>Designed marketing communications and corporate identity for the conference preceding the Epica Awards.</p>
+
+      <div class="glass-card fade-up stagger-2">
+        <div class="proj-card-num">02</div>
+        <div class="proj-card-sub">2023 · Executive Producer at DPPLR</div>
+        <div class="proj-card-title">Feature Film: Alice</div>
+        <p class="proj-card-body">Full executive production of a feature film — cast, crew, budget, and post-production across 5 months. Screened at Austin Film Festival 2025 as 'Kind'. <a href="https://www.dpplr.nl/projects/alice/" target="_blank" rel="noopener" style="color: var(--accent); opacity: 0.7; text-decoration: none; font-size: 0.8rem;">DPPLR ↗</a></p>
       </div>
-      <div class="project-card">
-        <h4>Feature Film: 'Alice'</h4>
-        <div class="project-sub">2023 &middot; Executive Producer at DPPLR</div>
-        <p>Full executive production of a feature film &mdash; cast, crew, budget, and post-production across 5 months.</p>
+
+      <div class="glass-card fade-up stagger-3">
+        <div class="proj-card-num">03</div>
+        <div class="proj-card-sub">2020 · Concept &amp; Identity Design</div>
+        <div class="proj-card-title">Epica Creative Circles</div>
+        <p class="proj-card-body">Designed marketing communications and corporate identity for the conference preceding the Epica Awards — Europe's largest creative festival judged by journalists.</p>
       </div>
-      <div class="project-card">
-        <h4>Future of Education</h4>
-        <div class="project-sub">Business School Berlin/Hamburg</div>
-        <p>International programme on digitalization in education. Co-created a platform connecting industry and students.</p>
+
+      <div class="glass-card fade-up stagger-4">
+        <div class="proj-card-num">04</div>
+        <div class="proj-card-sub">Business School Berlin/Hamburg</div>
+        <div class="proj-card-title">Future of Education Programme</div>
+        <p class="proj-card-body">International programme on digitalization in education. Co-created a platform concept connecting industry partners and students at scale.</p>
       </div>
+
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>&copy; 2026 Jimi Visser &middot; Amsterdam</p>
-  <div class="status">Currently: completing Claude certification &middot; building Studio 1104 &middot; shipping first app</div>
+  <div class="footer-logo">Jimi Visser<span>.</span></div>
+  <p>Amsterdam &nbsp;·&nbsp; Account Manager &nbsp;·&nbsp; AI Project Lead &nbsp;·&nbsp; Creative Producer</p>
+  <p style="margin-top: 0.75rem;">
+    <a href="index.html">Portfolio</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a>
+  </p>
+  <p style="margin-top: 1.5rem; opacity: 0.5;">Currently: Ogilvy Amsterdam &nbsp;·&nbsp; building Studio 1104 &nbsp;·&nbsp; shipping first app</p>
 </footer>
 
+<script>
+  // ===== ANIMATED GRAIN =====
+  (function() {
+    const grain = document.querySelector('.grain');
+    if (!grain) return;
+    const canvas = document.createElement('canvas');
+    grain.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    const SIZE = 180;
+    const off = document.createElement('canvas');
+    off.width = off.height = SIZE;
+    const octx = off.getContext('2d');
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    let tick = 0;
+    function draw() {
+      tick++;
+      if (tick % 3 === 0) {
+        const d = octx.createImageData(SIZE, SIZE);
+        for (let i = 0; i < d.data.length; i += 4) {
+          const v = (Math.random() * 255) | 0;
+          d.data[i] = d.data[i+1] = d.data[i+2] = v;
+          d.data[i+3] = 20;
+        }
+        octx.putImageData(d, 0, 0);
+      }
+      const pat = ctx.createPattern(off, 'repeat');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = pat;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    requestAnimationFrame(draw);
+  })();
+
+  // ===== SCROLL ANIMATIONS =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.fade-up, .fade-in').forEach(el => observer.observe(el));
+
+  // ===== COUNTUP =====
+  function countUp(el) {
+    const target = parseInt(el.dataset.target);
+    const prefix = el.dataset.prefix || '';
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    const ease = t => 1 - Math.pow(1 - t, 3);
+    (function loop(now) {
+      const t = Math.min((now - start) / duration, 1);
+      el.textContent = prefix + Math.round(ease(t) * target) + suffix;
+      if (t < 1) requestAnimationFrame(loop);
+    })(start);
+  }
+
+  const countObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !e.target.dataset.counted) {
+        e.target.dataset.counted = '1';
+        countUp(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.stat-number[data-target]').forEach(el => countObs.observe(el));
+</script>
 </body>
 </html>
