@@ -878,9 +878,8 @@
     -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, 0.07);
     border-radius: 20px;
-    padding: 2.25rem;
-    position: relative;
     overflow: hidden;
+    position: relative;
     transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow:
       0 4px 32px rgba(0, 0, 0, 0.25),
@@ -888,8 +887,8 @@
       inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   }
 
-  /* Glass top-light refraction */
-  .project-card::before {
+  /* Glass top-light refraction (only when no media header) */
+  .project-card.no-thumb::before {
     content: '';
     position: absolute;
     top: 0; left: 8%; right: 8%;
@@ -906,13 +905,48 @@
       inset 0 1px 0 rgba(255,255,255,0.09);
   }
 
+  /* Project card video thumbnail */
+  .project-card-media {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .project-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 0.8;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+  }
+
+  .project-card:hover .project-card-media img {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+
+  /* Reuse play-overlay and play-btn from work cards */
+  .project-card-body {
+    padding: 1.75rem 2rem 2rem;
+  }
+
+  .project-card.no-thumb .project-card-body {
+    padding: 2.25rem;
+  }
+
   .project-number {
     font-family: 'Fraunces', serif;
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: 700;
     color: rgba(184, 150, 62, 0.1);
     line-height: 1;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     letter-spacing: -2px;
   }
 
@@ -927,7 +961,7 @@
 
   .project-card h3 {
     font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 600;
     letter-spacing: -0.3px;
     color: var(--paper);
@@ -936,10 +970,10 @@
   }
 
   .project-card p {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     color: rgba(250, 250, 247, 0.42);
     line-height: 1.72;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
 
   .tag-dark {
@@ -1407,60 +1441,97 @@
   <div class="projects-scroll-wrap" id="projectsScroll">
     <div class="projects-track">
 
-      <!-- ░░░ FILL IN YOUR OGILVY PROJECTS BELOW ░░░ -->
-
+      <!-- FORD -->
       <div class="project-card fade-up stagger-1">
-        <div class="project-number">01</div>
-        <div class="project-client">Client &middot; Year</div>
-        <h3>Project Title</h3>
-        <p>Brief description of the project, your role, and what made it interesting or impactful.</p>
-        <div class="tag-row">
-          <span class="tag-dark">Role</span>
-          <span class="tag-dark">Channel</span>
+        <a class="project-card-media" href="#" onclick="openVideo('7qxMxXY8v18'); return false;" aria-label="Watch Ford Ready Set Ford NL">
+          <img src="https://img.youtube.com/vi/7qxMxXY8v18/maxresdefault.jpg" alt="Ford Ready Set Ford NL campaign" loading="lazy">
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3L13 8L5 13V3Z" fill="rgba(250,250,247,0.9)"/></svg>
+            </div>
+          </div>
+        </a>
+        <div class="project-card-body">
+          <div class="project-number">01</div>
+          <div class="project-client">Ford &middot; 2024&ndash;2025</div>
+          <h3>Ready Set Ford &mdash; NL Launch</h3>
+          <p>Part of a European account team relaunching Ford&rsquo;s presence in the Netherlands. Coordinated localisation of campaign assets across markets and rebuilt day-to-day account operations.</p>
+          <div class="tag-row">
+            <span class="tag-dark">Account Management</span>
+            <span class="tag-dark">Localisation</span>
+            <span class="tag-dark">European</span>
+          </div>
         </div>
       </div>
 
+      <!-- ZWITSAL -->
       <div class="project-card fade-up stagger-2">
-        <div class="project-number">02</div>
-        <div class="project-client">Client &middot; Year</div>
-        <h3>Project Title</h3>
-        <p>Brief description of the project, your role, and what made it interesting or impactful.</p>
-        <div class="tag-row">
-          <span class="tag-dark">Role</span>
-          <span class="tag-dark">Channel</span>
+        <a class="project-card-media" href="#" onclick="openVideo('gs508G7tESk'); return false;" aria-label="Watch Zwitsal Zacht is onze kracht">
+          <img src="https://img.youtube.com/vi/gs508G7tESk/maxresdefault.jpg" alt="Zwitsal — Zacht is onze kracht brand campaign" loading="lazy">
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3L13 8L5 13V3Z" fill="rgba(250,250,247,0.9)"/></svg>
+            </div>
+          </div>
+        </a>
+        <div class="project-card-body">
+          <div class="project-number">02</div>
+          <div class="project-client">Zwitsal &middot; 2025</div>
+          <h3>Zacht is onze kracht &mdash; Brand Overhaul</h3>
+          <p>Led the account on a full 360&deg; brand relaunch in collaboration with DesignBridge. Coordinated strategy, creative, influencer and production teams to launch the new visual identity and softer formula nationwide.</p>
+          <div class="tag-row">
+            <span class="tag-dark">360&deg; Campaign</span>
+            <span class="tag-dark">Brand Identity</span>
+            <span class="tag-dark">Influencer</span>
+            <span class="tag-dark">DesignBridge</span>
+          </div>
         </div>
       </div>
 
+      <!-- PRODENT -->
       <div class="project-card fade-up stagger-3">
-        <div class="project-number">03</div>
-        <div class="project-client">Client &middot; Year</div>
-        <h3>Project Title</h3>
-        <p>Brief description of the project, your role, and what made it interesting or impactful.</p>
-        <div class="tag-row">
-          <span class="tag-dark">Role</span>
-          <span class="tag-dark">Channel</span>
+        <a class="project-card-media" href="#" onclick="openVideo('VNnXFPNc3Fw'); return false;" aria-label="Watch Prodent Complete Bescherming">
+          <img src="https://img.youtube.com/vi/VNnXFPNc3Fw/maxresdefault.jpg" alt="Prodent Complete Bescherming TV commercial" loading="lazy">
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3L13 8L5 13V3Z" fill="rgba(250,250,247,0.9)"/></svg>
+            </div>
+          </div>
+        </a>
+        <div class="project-card-body">
+          <div class="project-number">03</div>
+          <div class="project-client">Prodent (Unilever) &middot; 2025</div>
+          <h3>Complete Bescherming &mdash; TV &amp; 360&deg;</h3>
+          <p>Account lead on the launch of Prodent&rsquo;s new Complete Protection range. Brought together strategy, creative and production to deliver a TV commercial plus full 360&deg; rollout across social and influencer channels.</p>
+          <div class="tag-row">
+            <span class="tag-dark">TV Commercial</span>
+            <span class="tag-dark">360&deg; Campaign</span>
+            <span class="tag-dark">Social</span>
+            <span class="tag-dark">Influencer</span>
+          </div>
         </div>
       </div>
 
+      <!-- BIBIGO / CJCJ -->
       <div class="project-card fade-up stagger-4">
-        <div class="project-number">04</div>
-        <div class="project-client">Client &middot; Year</div>
-        <h3>Project Title</h3>
-        <p>Brief description of the project, your role, and what made it interesting or impactful.</p>
-        <div class="tag-row">
-          <span class="tag-dark">Role</span>
-          <span class="tag-dark">Channel</span>
-        </div>
-      </div>
-
-      <div class="project-card fade-up stagger-5">
-        <div class="project-number">05</div>
-        <div class="project-client">Client &middot; Year</div>
-        <h3>Project Title</h3>
-        <p>Brief description of the project, your role, and what made it interesting or impactful.</p>
-        <div class="tag-row">
-          <span class="tag-dark">Role</span>
-          <span class="tag-dark">Channel</span>
+        <a class="project-card-media" href="#" onclick="openVideo('Go6-SeRkDFI'); return false;" aria-label="Watch Bibigo NL campaign">
+          <img src="https://img.youtube.com/vi/Go6-SeRkDFI/maxresdefault.jpg" alt="Bibigo NL — bibiGoGoGo content campaign" loading="lazy">
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 3L13 8L5 13V3Z" fill="rgba(250,250,247,0.9)"/></svg>
+            </div>
+          </div>
+        </a>
+        <div class="project-card-body">
+          <div class="project-number">04</div>
+          <div class="project-client">CJCJ &middot; Bibigo NL</div>
+          <h3>Bibigo &mdash; NL Content Machine</h3>
+          <p>Set up and ran the content operation to introduce Korean food brand Bibigo to Dutch audiences. Delivered both ATL and BTL campaigns to build brand awareness and drive trial across the Netherlands.</p>
+          <div class="tag-row">
+            <span class="tag-dark">ATL &amp; BTL</span>
+            <span class="tag-dark">Content Strategy</span>
+            <span class="tag-dark">Brand Launch</span>
+          </div>
         </div>
       </div>
 
