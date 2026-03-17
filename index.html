@@ -579,6 +579,10 @@
     margin-top: 3.5rem;
   }
 
+  .work-card.full-width {
+    grid-column: span 2;
+  }
+
   /* Liquid glass card on light background */
   .work-card {
     background: rgba(255, 255, 255, 0.75);
@@ -771,6 +775,109 @@
   .card-link svg { transition: transform 0.2s; }
   .card-link:hover { color: var(--ink); }
   .card-link:hover svg { transform: translateX(3px); }
+
+  /* ===== FILM STRIP (inside work card) ===== */
+  .film-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin: 1.25rem 0 1.1rem;
+  }
+
+  .film-strip.cols-5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .film-thumb {
+    display: block;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .film-thumb-img {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--ink);
+    margin-bottom: 0.45rem;
+  }
+
+  .film-thumb-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.72;
+    transition: opacity 0.3s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+    display: block;
+  }
+
+  .film-thumb:hover .film-thumb-img img {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+
+  .film-thumb-img .mini-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 24, 39, 0);
+    transition: background 0.25s;
+  }
+
+  .film-thumb:hover .film-thumb-img .mini-play {
+    background: rgba(17, 24, 39, 0.3);
+  }
+
+  .mini-play-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .film-thumb:hover .mini-play-icon {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .film-thumb-title {
+    font-family: 'Fraunces', serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.2px;
+    display: block;
+    line-height: 1.2;
+  }
+
+  .film-thumb-sub {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.56rem;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    display: block;
+    margin-top: 0.15rem;
+  }
+
+  .film-thumb-award {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.56rem;
+    color: var(--accent);
+    letter-spacing: 0.3px;
+    display: block;
+    margin-top: 0.1rem;
+  }
 
   /* Video lightbox */
   .video-modal {
@@ -1193,6 +1300,8 @@
   /* ===== RESPONSIVE ===== */
   @media (max-width: 900px) {
     .work-grid { grid-template-columns: 1fr; }
+    .work-card.full-width { grid-column: span 1; }
+    .film-strip.cols-5 { grid-template-columns: repeat(3, 1fr); }
     .ventures-grid { grid-template-columns: 1fr; }
     .stats-glass { grid-template-columns: repeat(2, 1fr); }
     .stat-item:nth-child(2) { border-right: none; }
@@ -1211,6 +1320,7 @@
     .projects-section { padding: 5rem 0; }
     .stats-section { padding: 0 1.5rem 5rem; }
     .hero h1 { font-size: 3.2rem; letter-spacing: -2px; }
+    .film-strip.cols-5 { grid-template-columns: repeat(3, 1fr); }
     .project-card { width: 300px; }
     .projects-track { padding: 0.5rem 1.5rem 1.5rem; }
     .projects-track .project-card:first-child { margin-left: 1.5rem; }
@@ -1398,16 +1508,43 @@
         </div>
       </div>
 
-      <!-- FEATURE FILM — text card -->
+      <!-- FILM PRODUCTION — three-film strip card -->
       <div class="work-card no-media fade-up stagger-1">
         <div class="work-card-body">
-          <div class="work-card-type">DPPLR &middot; 2023</div>
-          <h3>Feature Film: Alice</h3>
-          <p>Executive Produced a feature film from pre-production through delivery. Managed cast, crew, budget, and post-production across 5 months.</p>
+          <div class="work-card-type">DPPLR &middot; 2021&ndash;2025</div>
+          <h3>Film Production</h3>
+          <p>Line Producer on three productions for Amsterdam-based DPPLR &mdash; from an award-winning pandemic short to a feature film in Dutch cinemas. Managed crew, budget, and full production lifecycle end-to-end.</p>
+          <div class="film-strip">
+            <a class="film-thumb" href="#" onclick="openVideo('zoyTSYYbRBI'); return false;" aria-label="Watch Alice">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/zoyTSYYbRBI/mqdefault.jpg" alt="Alice — feature film" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">Alice</span>
+              <span class="film-thumb-sub">Feature &middot; 2025</span>
+            </a>
+            <a class="film-thumb" href="#" onclick="openVideo('lYsTXwX7qmM'); return false;" aria-label="Watch Ver Gekomen">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/lYsTXwX7qmM/mqdefault.jpg" alt="Ver Gekomen — short film" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">Ver Gekomen</span>
+              <span class="film-thumb-sub">Short &middot; 2023</span>
+            </a>
+            <a class="film-thumb" href="#" onclick="openVideo('NpvIKX1H7Qg'); return false;" aria-label="Watch Pantser">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/NpvIKX1H7Qg/mqdefault.jpg" alt="Pantser — short film" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">Pantser</span>
+              <span class="film-thumb-sub">Short &middot; 2021</span>
+              <span class="film-thumb-award">&#9734; Gouden Kalf</span>
+            </a>
+          </div>
           <div class="tag-row">
-            <span class="tag tag-default">Executive Producer</span>
-            <span class="tag tag-default">Feature Film</span>
-            <span class="tag tag-default">5-Month Lifecycle</span>
+            <span class="tag tag-gold">Gouden Kalf Best Short</span>
+            <span class="tag tag-default">Line Producer</span>
+            <span class="tag tag-default">Feature &amp; Shorts</span>
           </div>
         </div>
       </div>
@@ -1417,11 +1554,71 @@
         <div class="work-card-body">
           <div class="work-card-type">Cannes Lions &middot; 2020</div>
           <h3>Roger Hatchuel Academy &mdash; Google</h3>
-          <p>Selected as the Netherlands representative for Cannes Lions' global programme for next-gen creative leaders. Developed a strategic brand positioning concept for Google.</p>
+          <p>Selected as the Netherlands representative for the Roger Hatchuel Student Academy &mdash; Cannes Lions&rsquo; global programme for the next generation of creative leaders. Worked on a live brief for Google alongside peers from around the world.</p>
           <div class="tag-row">
             <span class="tag tag-gold">NL Representative</span>
-            <span class="tag tag-default">Google</span>
+            <span class="tag tag-default">Google Brief</span>
             <span class="tag tag-default">Brand Strategy</span>
+          </div>
+          <a href="https://www.canneslions.com/learning/academies/roger-hatchuel" target="_blank" rel="noopener" class="card-link">
+            Cannes Lions
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- DPPLR COMMERCIALS — full-width card -->
+      <div class="work-card no-media full-width fade-up">
+        <div class="work-card-body">
+          <div class="work-card-type">DPPLR &middot; 2021&ndash;2024 &middot; Line Producer</div>
+          <h3>Commercial Production</h3>
+          <p>Line producer on branded content and commercials for leading Dutch and international brands, produced through Amsterdam-based DPPLR.</p>
+          <div class="film-strip cols-5" style="margin-bottom: 0;">
+
+            <a class="film-thumb" href="#" onclick="openVideo('22L3aty3IT4'); return false;" aria-label="Watch A.Vogel Mooiste Stukje">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/22L3aty3IT4/mqdefault.jpg" alt="A.Vogel — Mooiste Stukje" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">A.Vogel</span>
+              <span class="film-thumb-sub">Mooiste Stukje</span>
+            </a>
+
+            <a class="film-thumb" href="#" onclick="openVideo('uS_Rrd_w0HI'); return false;" aria-label="Watch Klene Pauze">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/uS_Rrd_w0HI/mqdefault.jpg" alt="Klene — Gun jezelf een pauze" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">Klene</span>
+              <span class="film-thumb-sub">Gun jezelf een pauze</span>
+            </a>
+
+            <a class="film-thumb" href="https://www.dpplr.nl/projects/we-mogen-weer/" target="_blank" rel="noopener" aria-label="View Bol.com We Mogen Weer on DPPLR">
+              <div class="film-thumb-img" style="background: linear-gradient(135deg, #0d2b4e 0%, #1a4a7a 100%); display:flex; align-items:center; justify-content:center;">
+                <span style="font-family:'Fraunces',serif; font-size:0.75rem; color:rgba(250,250,247,0.6); text-align:center; padding:0.5rem; line-height:1.3;">bol.com<br><em style="font-weight:300;">We Mogen Weer</em></span>
+              </div>
+              <span class="film-thumb-title">bol.com</span>
+              <span class="film-thumb-sub">We Mogen Weer</span>
+            </a>
+
+            <a class="film-thumb" href="#" onclick="openVideo('82P6axzUf70'); return false;" aria-label="Watch DJI Er zit meer achter">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/82P6axzUf70/mqdefault.jpg" alt="DJI — Er zit meer achter" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">DJI</span>
+              <span class="film-thumb-sub">Er zit meer achter</span>
+            </a>
+
+            <a class="film-thumb" href="#" onclick="openVideo('_3v3MtTQx6k'); return false;" aria-label="Watch Bridgefund Make Money Smile">
+              <div class="film-thumb-img">
+                <img src="https://img.youtube.com/vi/_3v3MtTQx6k/mqdefault.jpg" alt="Bridgefund — Make Money Smile" loading="lazy">
+                <div class="mini-play"><div class="mini-play-icon"><svg width="8" height="9" viewBox="0 0 8 9" fill="none"><path d="M1.5 1L6.5 4.5L1.5 8V1Z" fill="rgba(250,250,247,0.9)"/></svg></div></div>
+              </div>
+              <span class="film-thumb-title">Bridgefund</span>
+              <span class="film-thumb-sub">Make Money Smile</span>
+            </a>
+
           </div>
         </div>
       </div>
