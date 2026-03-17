@@ -45,10 +45,10 @@
   /* ===== ANIMATIONS ===== */
   .fade-up {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(52px) scale(0.97);
+    transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up.visible { opacity: 1; transform: translateY(0) scale(1); }
 
   .fade-in {
     opacity: 0;
@@ -61,6 +61,52 @@
   .stagger-3 { transition-delay: 0.24s; }
   .stagger-4 { transition-delay: 0.32s; }
   .stagger-5 { transition-delay: 0.40s; }
+
+  /* ===== CLIP WIPE REVEAL ===== */
+  .clip-wipe {
+    clip-path: inset(0 102% 0 0);
+    transition: clip-path 1.15s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: clip-path;
+  }
+  .clip-wipe.visible { clip-path: inset(0 0% 0 0); }
+  .clip-wipe.delay-1 { transition-delay: 0.1s; }
+  .clip-wipe.delay-2 { transition-delay: 0.2s; }
+
+  /* ===== HERO CHIP TICKER ===== */
+  .hero-ticker {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.2rem 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  }
+  .hero-ticker-inner {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: ticker-scroll 30s linear infinite;
+  }
+  .hero-ticker-inner span {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(250,250,247,0.22);
+    white-space: nowrap;
+  }
+  .hero-ticker-inner span::before {
+    content: '/ ';
+    color: var(--accent);
+    opacity: 0.5;
+  }
+  @keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
 
   /* ===== SPLIT TEXT REVEAL ===== */
   .h1-line {
@@ -1585,6 +1631,13 @@
     </div>
   </div>
 
+  <div class="hero-ticker" aria-hidden="true">
+    <div class="hero-ticker-inner">
+      <span>Experiential</span><span>TV Commercial</span><span>Film Production</span><span>Account Management</span><span>Brand Identity</span><span>Social &amp; Influencer</span><span>AI Automation</span><span>360° Campaign</span><span>Cross-Market</span><span>Executive Production</span>
+      <span>Experiential</span><span>TV Commercial</span><span>Film Production</span><span>Account Management</span><span>Brand Identity</span><span>Social &amp; Influencer</span><span>AI Automation</span><span>360° Campaign</span><span>Cross-Market</span><span>Executive Production</span>
+    </div>
+  </div>
+
   <div class="scroll-hint" aria-hidden="true">
     <span class="scroll-hint-label">Scroll</span>
     <div class="scroll-hint-line"></div>
@@ -1625,7 +1678,7 @@
 <section class="work-section" id="work">
   <div class="container">
     <div class="section-eyebrow fade-up"><span class="section-eyebrow-line"></span>Featured Work</div>
-    <h2 class="section-title fade-up" style="color: var(--ink);">Campaigns that <em style="font-style: italic; font-weight: 300; color: var(--accent);">made noise</em></h2>
+    <h2 class="section-title fade-up clip-wipe" style="color: var(--ink);">Campaigns that <em style="font-style: italic; font-weight: 300; color: var(--accent);">made noise</em></h2>
     <p class="section-sub fade-up">Selected work from Ogilvy Amsterdam and beyond, featured in international press.</p>
 
     <div class="work-grid">
@@ -1834,7 +1887,7 @@
 <section class="projects-section" id="projects">
   <div class="projects-header">
     <div class="section-eyebrow fade-up"><span class="section-eyebrow-line"></span>Ogilvy Amsterdam &middot; 2024&ndash;2025</div>
-    <h2 class="section-title fade-up">Recent <em style="font-style: italic; font-weight: 300; color: var(--accent);">projects</em></h2>
+    <h2 class="section-title fade-up clip-wipe">Recent <em style="font-style: italic; font-weight: 300; color: var(--accent);">projects</em></h2>
     <p class="section-sub fade-up" style="color: rgba(250,250,247,0.4);">The day-to-day &mdash; client projects, campaigns, and productions delivered at Ogilvy over the last few months.</p>
   </div>
 
@@ -1971,7 +2024,7 @@
   <div class="ventures-glow" aria-hidden="true"></div>
   <div class="container" style="position: relative; z-index: 1;">
     <div class="section-eyebrow fade-up"><span class="section-eyebrow-line"></span>Ventures</div>
-    <h2 class="section-title fade-up">What I build <em style="font-style: italic; font-weight: 300; color: var(--accent);">outside the 9&ndash;5</em></h2>
+    <h2 class="section-title fade-up clip-wipe">What I build <em style="font-style: italic; font-weight: 300; color: var(--accent);">outside the 9&ndash;5</em></h2>
     <p class="section-sub fade-up" style="color: rgba(250,250,247,0.4);">Where curiosity meets code.</p>
 
     <div class="ventures-grid">
@@ -2073,7 +2126,7 @@
         for (let i = 0; i < d.data.length; i += 4) {
           const v = (Math.random() * 255) | 0;
           d.data[i] = d.data[i+1] = d.data[i+2] = v;
-          d.data[i+3] = 10;
+          d.data[i+3] = 6;
         }
         octx.putImageData(d, 0, 0);
       }
@@ -2191,6 +2244,29 @@
   scroller.addEventListener('touchmove', e => {
     scroller.scrollLeft = scrollLeft - (e.touches[0].pageX - scroller.offsetLeft - startX) * 1.4;
   }, { passive: true });
+
+  // ===== SCROLL VELOCITY SKEW =====
+  (function() {
+    const targets = document.querySelectorAll('.work-grid, .projects-track, .ventures-grid');
+    let lastY = 0, skew = 0;
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      skew += (y - lastY) * 0.06;
+      lastY = y;
+    }, { passive: true });
+    (function loop() {
+      skew *= 0.88;
+      const s = Math.max(-2.2, Math.min(2.2, skew));
+      targets.forEach(el => { el.style.transform = `skewY(${s.toFixed(3)}deg)`; });
+      requestAnimationFrame(loop);
+    })();
+  })();
+
+  // ===== CLIP-WIPE OBSERVER (separate from fade-up observer) =====
+  const clipObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.clip-wipe').forEach(el => clipObs.observe(el));
 
   // ===== SPLIT TEXT H1 REVEAL =====
   (function() {
