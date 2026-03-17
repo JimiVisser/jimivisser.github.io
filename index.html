@@ -72,41 +72,6 @@
   .clip-wipe.delay-1 { transition-delay: 0.1s; }
   .clip-wipe.delay-2 { transition-delay: 0.2s; }
 
-  /* ===== HERO CHIP TICKER ===== */
-  .hero-ticker {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 1.2rem 0;
-    overflow: hidden;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%);
-  }
-  .hero-ticker-inner {
-    display: flex;
-    gap: 2rem;
-    width: max-content;
-    animation: ticker-scroll 30s linear infinite;
-  }
-  .hero-ticker-inner span {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(250,250,247,0.22);
-    white-space: nowrap;
-  }
-  .hero-ticker-inner span::before {
-    content: '/ ';
-    color: var(--accent);
-    opacity: 0.5;
-  }
-  @keyframes ticker-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
 
   /* ===== SPLIT TEXT REVEAL ===== */
   .h1-line {
@@ -1631,12 +1596,6 @@
     </div>
   </div>
 
-  <div class="hero-ticker" aria-hidden="true">
-    <div class="hero-ticker-inner">
-      <span>Experiential</span><span>TV Commercial</span><span>Film Production</span><span>Account Management</span><span>Brand Identity</span><span>Social &amp; Influencer</span><span>AI Automation</span><span>360° Campaign</span><span>Cross-Market</span><span>Executive Production</span>
-      <span>Experiential</span><span>TV Commercial</span><span>Film Production</span><span>Account Management</span><span>Brand Identity</span><span>Social &amp; Influencer</span><span>AI Automation</span><span>360° Campaign</span><span>Cross-Market</span><span>Executive Production</span>
-    </div>
-  </div>
 
   <div class="scroll-hint" aria-hidden="true">
     <span class="scroll-hint-label">Scroll</span>
