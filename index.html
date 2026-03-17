@@ -586,9 +586,8 @@
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.9);
     border-radius: 20px;
-    padding: 2.25rem;
-    position: relative;
     overflow: hidden;
+    position: relative;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow:
       0 2px 20px rgba(0, 0, 0, 0.06),
@@ -596,7 +595,8 @@
       inset 0 1px 0 rgba(255, 255, 255, 1);
   }
 
-  .work-card::before {
+  /* Gold top-bar slides in on hover (only for text-only cards) */
+  .work-card.no-media::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -605,9 +605,10 @@
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1;
   }
 
-  .work-card:hover::before { transform: scaleX(1); }
+  .work-card.no-media:hover::before { transform: scaleX(1); }
 
   .work-card:hover {
     transform: translateY(-6px);
@@ -616,6 +617,99 @@
       0 4px 12px rgba(0, 0, 0, 0.06),
       inset 0 1px 0 rgba(255, 255, 255, 1),
       0 0 0 1px rgba(184, 150, 62, 0.12);
+  }
+
+  /* ===== MEDIA HEADER (video / image area) ===== */
+  .work-card-media {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--ink);
+    text-decoration: none;
+  }
+
+  .work-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+    opacity: 0.9;
+  }
+
+  .work-card:hover .work-card-media img {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+
+  /* Play button overlay */
+  .play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 24, 39, 0);
+    transition: background 0.3s;
+  }
+
+  .work-card:hover .play-overlay {
+    background: rgba(17, 24, 39, 0.25);
+  }
+
+  .play-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(250, 250, 247, 0.15);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0.85);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .work-card:hover .play-btn {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .play-btn svg {
+    margin-left: 3px;
+  }
+
+  /* Campaign badge overlay (bottom-left of image) */
+  .media-badge {
+    position: absolute;
+    bottom: 0.75rem;
+    left: 0.75rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(250, 250, 247, 0.8);
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+  }
+
+  /* Card body (below media or top of text-only cards) */
+  .work-card-body {
+    padding: 2rem 2rem 2rem;
+  }
+
+  .work-card.no-media .work-card-body {
+    padding: 2.25rem;
   }
 
   .work-card-type {
@@ -677,6 +771,66 @@
   .card-link svg { transition: transform 0.2s; }
   .card-link:hover { color: var(--ink); }
   .card-link:hover svg { transform: translateX(3px); }
+
+  /* Video lightbox */
+  .video-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: rgba(17, 24, 39, 0.9);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .video-modal.active { display: flex; }
+
+  .video-modal-inner {
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+  }
+
+  .video-modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(250,250,247,0.6);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+  }
+
+  .video-modal-close:hover {
+    background: rgba(255,255,255,0.15);
+    color: var(--paper);
+  }
+
+  .video-embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
 
   /* ===== OGILVY PROJECTS — dark, horizontal scroll carousel ===== */
   .projects-section {
@@ -1140,59 +1294,101 @@
 
     <div class="work-grid">
 
+      <!-- LOODS 5 — video card -->
       <div class="work-card fade-up stagger-1">
-        <div class="work-card-type">Ogilvy Amsterdam &middot; 2025</div>
-        <h3>Loods 5 &mdash; Showroom on Ice</h3>
-        <p>Turned an ice rink into a shoppable showroom for furniture retailer Loods 5. The campaign delivered a 30% sales uplift and 2.8M press reach across international media.</p>
-        <div class="tag-row">
-          <span class="tag tag-gold">30% Sales Uplift</span>
-          <span class="tag tag-default">2.8M Reach</span>
-          <span class="tag tag-default">Experiential</span>
-        </div>
-        <a href="https://lbbonline.com/news/Loods-5-Showroom-on-Ice" target="_blank" rel="noopener" class="card-link">
-          LBBOnline
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <a class="work-card-media" href="#" onclick="openVideo('SiUiahpeuLk'); return false;" aria-label="Watch Loods 5 — Showroom on Ice">
+          <img
+            src="https://img.youtube.com/vi/SiUiahpeuLk/maxresdefault.jpg"
+            alt="Loods 5 Showroom on Ice — ice rink turned into a shoppable furniture showroom"
+            loading="lazy"
+          >
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M5 3L13 8L5 13V3Z" fill="rgba(250,250,247,0.9)"/>
+              </svg>
+            </div>
+          </div>
+          <span class="media-badge">Ogilvy Amsterdam &middot; 2025</span>
         </a>
+        <div class="work-card-body">
+          <div class="work-card-type">Experiential &middot; Retail</div>
+          <h3>Loods 5 &mdash; Showroom on Ice</h3>
+          <p>Turned an ice rink into a shoppable showroom for furniture retailer Loods 5. The campaign delivered a 30% sales uplift and 2.8M press reach across international media.</p>
+          <div class="tag-row">
+            <span class="tag tag-gold">30% Sales Uplift</span>
+            <span class="tag tag-default">2.8M Reach</span>
+            <span class="tag tag-default">Experiential</span>
+          </div>
+          <a href="https://lbbonline.com/news/Loods-5-Showroom-on-Ice" target="_blank" rel="noopener" class="card-link">
+            LBBOnline
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
       </div>
 
+      <!-- SNOW PENISES — video card -->
       <div class="work-card fade-up stagger-2">
-        <div class="work-card-type">Ogilvy Amsterdam &middot; 2026</div>
-        <h3>Testicular Cancer Foundation &mdash; Snow Penises</h3>
-        <p>A bold winter campaign using snow sculptures to remind men to check themselves. Featured across international advertising and health media.</p>
-        <div class="tag-row">
-          <span class="tag tag-gold">International Press</span>
-          <span class="tag tag-default">Health Awareness</span>
-          <span class="tag tag-default">Guerrilla</span>
+        <a class="work-card-media" href="#" onclick="openVideo('W3gdm2uhrNM'); return false;" aria-label="Watch Snow Penises campaign">
+          <img
+            src="https://img.youtube.com/vi/W3gdm2uhrNM/maxresdefault.jpg"
+            alt="Testicular Cancer Foundation — Snow Penises guerrilla campaign"
+            loading="lazy"
+          >
+          <div class="play-overlay">
+            <div class="play-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M5 3L13 8L5 13V3Z" fill="rgba(250,250,247,0.9)"/>
+              </svg>
+            </div>
+          </div>
+          <span class="media-badge">Ogilvy Amsterdam &middot; 2026</span>
+        </a>
+        <div class="work-card-body">
+          <div class="work-card-type">Guerrilla &middot; Health Awareness</div>
+          <h3>Testicular Cancer Foundation &mdash; Snow Penises</h3>
+          <p>A bold winter campaign using snow sculptures to remind men to check themselves. Featured across international advertising and health media.</p>
+          <div class="tag-row">
+            <span class="tag tag-gold">International Press</span>
+            <span class="tag tag-default">Health Awareness</span>
+            <span class="tag tag-default">Guerrilla</span>
+          </div>
+          <a href="https://roastbrief.us/with-eye-catching-snow-penises-testicular-cancer-foundation-and-ogilvy-amsterdam-call-on-men-give-the-same-love-to-your-own-balls/" target="_blank" rel="noopener" class="card-link">
+            Roastbrief
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="https://www.famouscampaigns.com/2026/01/snow-joke-dutch-campaign-sculpts-a-witty-reminder-for-mens-health/" target="_blank" rel="noopener" class="card-link">
+            Famous Campaigns
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
-        <a href="https://roastbrief.us/with-eye-catching-snow-penises-testicular-cancer-foundation-and-ogilvy-amsterdam-call-on-men-give-the-same-love-to-your-own-balls/" target="_blank" rel="noopener" class="card-link">
-          Roastbrief
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="https://www.famouscampaigns.com/2026/01/snow-joke-dutch-campaign-sculpts-a-witty-reminder-for-mens-health/" target="_blank" rel="noopener" class="card-link">
-          Famous Campaigns
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
       </div>
 
-      <div class="work-card fade-up stagger-1">
-        <div class="work-card-type">DPPLR &middot; 2023</div>
-        <h3>Feature Film: Alice</h3>
-        <p>Executive Produced a feature film from pre-production through delivery. Managed cast, crew, budget, and post-production across 5 months.</p>
-        <div class="tag-row">
-          <span class="tag tag-default">Executive Producer</span>
-          <span class="tag tag-default">Feature Film</span>
-          <span class="tag tag-default">5-Month Lifecycle</span>
+      <!-- FEATURE FILM — text card -->
+      <div class="work-card no-media fade-up stagger-1">
+        <div class="work-card-body">
+          <div class="work-card-type">DPPLR &middot; 2023</div>
+          <h3>Feature Film: Alice</h3>
+          <p>Executive Produced a feature film from pre-production through delivery. Managed cast, crew, budget, and post-production across 5 months.</p>
+          <div class="tag-row">
+            <span class="tag tag-default">Executive Producer</span>
+            <span class="tag tag-default">Feature Film</span>
+            <span class="tag tag-default">5-Month Lifecycle</span>
+          </div>
         </div>
       </div>
 
-      <div class="work-card fade-up stagger-2">
-        <div class="work-card-type">Cannes Lions &middot; 2020</div>
-        <h3>Roger Hatchuel Academy &mdash; Google</h3>
-        <p>Selected as the Netherlands representative for Cannes Lions' global programme for next-gen creative leaders. Developed a strategic brand positioning concept for Google.</p>
-        <div class="tag-row">
-          <span class="tag tag-gold">NL Representative</span>
-          <span class="tag tag-default">Google</span>
-          <span class="tag tag-default">Brand Strategy</span>
+      <!-- CANNES — text card -->
+      <div class="work-card no-media fade-up stagger-2">
+        <div class="work-card-body">
+          <div class="work-card-type">Cannes Lions &middot; 2020</div>
+          <h3>Roger Hatchuel Academy &mdash; Google</h3>
+          <p>Selected as the Netherlands representative for Cannes Lions' global programme for next-gen creative leaders. Developed a strategic brand positioning concept for Google.</p>
+          <div class="tag-row">
+            <span class="tag tag-gold">NL Representative</span>
+            <span class="tag tag-default">Google</span>
+            <span class="tag tag-default">Brand Strategy</span>
+          </div>
         </div>
       </div>
 
@@ -1345,6 +1541,16 @@
   </div>
 </section>
 
+<!-- VIDEO LIGHTBOX MODAL -->
+<div class="video-modal" id="videoModal" onclick="closeVideo(event)">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" onclick="closeVideo(null)" aria-label="Close video">&#x2715;</button>
+    <div class="video-embed">
+      <iframe id="videoFrame" src="" title="Campaign video" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <p>&copy; 2026 Jimi Visser &middot; Amsterdam</p>
@@ -1395,6 +1601,26 @@
 
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && document.getElementById('menu').classList.contains('open')) toggleMenu();
+  });
+
+  // ===== VIDEO LIGHTBOX =====
+  function openVideo(id) {
+    const modal = document.getElementById('videoModal');
+    document.getElementById('videoFrame').src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideo(e) {
+    if (e && e.target !== document.getElementById('videoModal') && !e.target.classList.contains('video-modal-close')) return;
+    const modal = document.getElementById('videoModal');
+    modal.classList.remove('active');
+    document.getElementById('videoFrame').src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeVideo(null);
   });
 
   // ===== DRAG-TO-SCROLL PROJECTS CAROUSEL =====
