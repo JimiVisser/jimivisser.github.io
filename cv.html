@@ -3,946 +3,375 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Background — Jimi Visser</title>
+<title>Background — Jimi Visser · Commercial Producer</title>
+<meta name="description" content="Background & experience of Jimi Visser — commercial producer and Executive Producer at WPP Production Nordics. Silver Lion, Cannes Lions 2026.">
+<meta property="og:title" content="Background — Jimi Visser">
+<meta property="og:description" content="Commercial producer & Executive Producer at WPP Production Nordics. Silver Lion, Cannes Lions 2026.">
+<meta name="theme-color" content="#100E0C">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=general-sans@400,500,600&f[]=zodiak@400,401,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500&display=swap');
+  :root{
+    --bg:#100E0C; --bg2:#17150F; --panel:#1C1A15;
+    --ink:#F5F3EE; --mut:#ABA69A; --dim:#726C60;
+    --line:rgba(255,255,255,0.11); --line2:rgba(255,255,255,0.06);
+    --accent:#FF5CA8; --gold:#E0B44A;
+    --disp:'Clash Display','Space Grotesk',sans-serif;
+    --sans:'General Sans','Inter',sans-serif;
+    --serif:'Zodiak','Fraunces',serif;
+    --mono:'Geist Mono','JetBrains Mono',monospace;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+    --rail:76px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  ::selection{background:rgba(255,92,168,.28);}
 
-  :root {
-    --ink: #0e1420;
-    --paper: #FAFAF7;
-    --accent: #B8963E;
-    --accent-light: #D4B263;
-    --muted: rgba(250,250,247,0.38);
-    --line: rgba(255,255,255,0.06);
-  }
+  .wash{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(62vw 55vw at 84% 4%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 64%);}
+  .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(150vw 120vh at 50% 35%, transparent 55%, rgba(0,0,0,.3) 100%);}
+  .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:140px;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: auto; }
+  .rail{position:fixed;top:0;left:0;bottom:0;width:var(--rail);z-index:60;
+    display:flex;flex-direction:column;align-items:center;justify-content:space-between;
+    padding:1.5rem 0;border-right:1px solid var(--line);background:rgba(16,14,12,0.5);backdrop-filter:blur(16px);}
+  .rail .mark{width:38px;height:38px;border-radius:50%;background:var(--accent);color:#1A0410;text-decoration:none;
+    font-family:var(--disp);font-weight:600;font-size:1.15rem;display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease);}
+  .rail .mark:hover{transform:scale(1.08);}
+  .rail .vname{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);}
+  .rail .soc{display:flex;flex-direction:column;gap:1rem;}
+  .rail .soc a{font-family:var(--mono);font-size:.56rem;letter-spacing:.1em;color:var(--dim);text-decoration:none;writing-mode:vertical-rl;transform:rotate(180deg);transition:.25s;}
+  .rail .soc a:hover{color:var(--ink);}
 
-  body {
-    font-family: 'Manrope', sans-serif;
-    background: var(--ink);
-    color: var(--paper);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+  .topnav{position:fixed;top:1.6rem;right:3vw;z-index:60;display:flex;gap:1.6rem;align-items:center;}
+  .topnav a{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);text-decoration:none;transition:.25s;}
+  .topnav a:hover{color:var(--ink);}
+  .topnav a.home{color:var(--ink);border:1px solid var(--line);padding:.5rem .9rem;border-radius:100px;}
+  .topnav a.home:hover{border-color:var(--accent);color:var(--accent);}
 
-  /* ===== GRAIN ===== */
-  .grain { position: fixed; inset: 0; z-index: 999; pointer-events: none; }
-  .grain canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+  main{margin-left:var(--rail);position:relative;z-index:2;}
 
-  /* ===== SMOOTH SCROLL WRAPPER ===== */
-  #smooth-wrapper { overflow: hidden; position: fixed; inset: 0; }
-  #smooth-content { will-change: transform; }
+  /* HERO */
+  .hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;padding:9rem 6vw 4rem;position:relative;}
+  .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;color:var(--accent);margin-bottom:1.7rem;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(2.8rem,8vw,7rem);line-height:.9;letter-spacing:-.03em;max-width:16ch;}
+  h1 .serif{font-family:var(--serif);font-style:italic;font-weight:400;
+    background:linear-gradient(103deg,#FF5CA8,#FFB84D 48%,#6BFFB8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .bio{max-width:640px;margin-top:2rem;color:var(--mut);font-size:clamp(1rem,1.3vw,1.18rem);line-height:1.8;font-weight:400;}
+  .bio b{color:var(--ink);font-weight:500;}
+  .chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:2rem;}
+  .chips span{font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--mut);border:1px solid var(--line);padding:.5rem .85rem;border-radius:100px;}
+  .chips span.gold{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 40%,transparent);}
 
-  /* ===== ANIMATIONS ===== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(48px) scale(0.97);
-    transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1s cubic-bezier(0.16,1,0.3,1);
-  }
-  .reveal.on { opacity: 1; transform: translateY(0) scale(1); }
-  .reveal.d1 { transition-delay: 0.08s; }
-  .reveal.d2 { transition-delay: 0.18s; }
-  .reveal.d3 { transition-delay: 0.28s; }
-  .reveal.d4 { transition-delay: 0.38s; }
+  /* STATS */
+  .stats{margin:0 6vw;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--bg2);}
+  .stat{padding:2rem 1.5rem;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat b{font-family:var(--disp);font-weight:600;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1;display:block;
+    background:linear-gradient(103deg,#FF5CA8,#FFB84D);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .stat span{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);margin-top:.5rem;display:block;}
 
-  .clip-reveal {
-    clip-path: inset(0 102% 0 0);
-    transition: clip-path 1.2s cubic-bezier(0.16,1,0.3,1);
-  }
-  .clip-reveal.on { clip-path: inset(0 0% 0 0); }
-  .clip-reveal.d1 { transition-delay: 0.12s; }
+  /* SECTION */
+  .sec{padding:6rem 6vw;position:relative;}
+  .sec.alt{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .eyebrow{font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.9rem;display:flex;align-items:center;gap:.6rem;}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
+  h2{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,4.4vw,3.4rem);letter-spacing:-.03em;line-height:1;margin-bottom:2.5rem;}
+  h2 .serif{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--accent);}
 
-  /* ===== H1 LINE REVEAL ===== */
-  .h1-line { display: block; overflow: hidden; line-height: 1.0; }
-  .h1-inner {
-    display: block;
-    transform: translateY(110%);
-    transition: transform 1.1s cubic-bezier(0.16,1,0.3,1);
-    will-change: transform;
-  }
-  .h1-inner.on { transform: translateY(0); }
-  .h1-inner.d1 { transition-delay: 0.06s; }
-  .h1-inner.d2 { transition-delay: 0.18s; }
-  .h1-inner.d3 { transition-delay: 0.3s; }
+  /* TIMELINE */
+  .te{display:grid;grid-template-columns:200px 1fr;gap:2.5rem;padding:2.2rem 0;border-bottom:1px solid var(--line);}
+  .te:last-child{border-bottom:none;}
+  .te .yr{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--accent);}
+  .te .dur{font-family:var(--mono);font-size:.6rem;color:var(--dim);margin-top:.3rem;}
+  .te .now-tag{display:inline-block;margin-top:.5rem;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#0A2A1C;background:#6BFFB8;padding:.2rem .5rem;border-radius:4px;}
+  .te h3{font-family:var(--disp);font-weight:500;font-size:clamp(1.3rem,2.2vw,1.8rem);letter-spacing:-.02em;line-height:1.1;}
+  .te .co{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;color:var(--mut);margin:.35rem 0 1rem;}
+  .te ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+  .te li{color:var(--mut);font-size:.92rem;line-height:1.65;padding-left:1.1rem;position:relative;}
+  .te li::before{content:'';position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.6;}
+  .te li b{color:var(--ink);font-weight:500;}
 
-  /* ===== NAV ===== */
-  nav {
-    position: fixed;
-    top: 1.25rem; left: 50%;
-    transform: translateX(-50%);
-    z-index: 200;
-    display: flex; align-items: center; gap: 0.25rem;
-    padding: 0.5rem 0.65rem;
-    background: rgba(14,20,32,0.6);
-    backdrop-filter: blur(40px) saturate(200%);
-    -webkit-backdrop-filter: blur(40px) saturate(200%);
-    border-radius: 100px;
-    border: 1px solid rgba(255,255,255,0.07);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
-    white-space: nowrap;
-  }
-  .nav-logo {
-    font-family: 'Fraunces', serif;
-    font-size: 0.92rem; font-weight: 600;
-    color: var(--paper); text-decoration: none;
-    padding: 0.3rem 0.75rem; letter-spacing: -0.3px;
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-div { width: 1px; height: 18px; background: rgba(255,255,255,0.1); margin: 0 0.15rem; }
-  .nav-back {
-    font-family: 'Fira Code', monospace; font-size: 0.72rem;
-    color: rgba(250,250,247,0.5); text-decoration: none;
-    padding: 0.3rem 0.75rem; border-radius: 100px;
-    transition: all 0.25s;
-  }
-  .nav-back:hover { color: var(--paper); background: rgba(255,255,255,0.06); }
-  .nav-back::before { content: '← '; color: var(--accent); }
+  /* CREDENTIALS */
+  .cred-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:3.5rem;}
+  .cred-title{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:1.4rem;}
+  .cred-item{padding:1.1rem 0;border-bottom:1px solid var(--line2);}
+  .cred-item .cn{font-family:var(--disp);font-weight:500;font-size:1.1rem;}
+  .cred-item .cs{color:var(--mut);font-size:.85rem;margin-top:.2rem;}
+  .tags{display:flex;gap:.4rem;flex-wrap:wrap;}
+  .tag{font-family:var(--mono);font-size:.6rem;letter-spacing:.03em;padding:.4rem .7rem;border-radius:8px;border:1px solid var(--line);color:var(--mut);}
+  .tag.gold{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 40%,transparent);background:color-mix(in srgb,var(--gold) 8%,transparent);}
 
-  /* ===== HERO ===== */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: end;
-    padding: 0 4vw 6rem;
-    padding-top: 9rem;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid var(--line);
-  }
+  /* AI CARDS */
+  .ai-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+  .ai-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:2rem;position:relative;overflow:hidden;transition:.4s var(--ease);}
+  .ai-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--accent);opacity:.6;}
+  .ai-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 40%,transparent);}
+  .ai-card .num{font-family:var(--disp);font-weight:600;font-size:2.4rem;color:rgba(255,255,255,.1);line-height:1;}
+  .ai-card .lbl{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin:.8rem 0 .5rem;}
+  .ai-card h3{font-family:var(--disp);font-weight:500;font-size:1.25rem;letter-spacing:-.02em;margin-bottom:.7rem;}
+  .ai-card p{color:var(--mut);font-size:.88rem;line-height:1.7;}
 
-  .hero-bg {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(ellipse 70% 50% at 85% 15%, rgba(184,150,62,0.07) 0%, transparent 55%),
-      radial-gradient(ellipse 40% 55% at 5% 85%, rgba(184,150,62,0.04) 0%, transparent 55%);
-    pointer-events: none;
-  }
-  .hero-grid {
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size: 80px 80px;
-    pointer-events: none;
-    mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.5) 0%, transparent 75%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(0,0,0,0.5) 0%, transparent 75%);
-  }
-  .hero-streak {
-    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
-  }
-  .hero-streak::before {
-    content: '';
-    position: absolute; top: -50%; left: -100%; width: 55%; height: 200%;
-    background: linear-gradient(108deg,
-      transparent 42%, rgba(184,150,62,0.03) 46%,
-      rgba(255,255,255,0.04) 50%, rgba(184,150,62,0.03) 54%, transparent 58%);
-    animation: streak 11s cubic-bezier(0.4,0,0.6,1) infinite;
-    animation-delay: 1s;
-  }
-  @keyframes streak {
-    0%   { transform: translateX(-5%);  opacity: 0; }
-    8%   { opacity: 1; }
-    88%  { opacity: 1; }
-    100% { transform: translateX(290%); opacity: 0; }
-  }
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  .proj{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:2rem;transition:.4s var(--ease);}
+  .proj:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--gold) 40%,transparent);}
+  .proj .pnum{font-family:var(--disp);font-weight:600;font-size:1.6rem;color:rgba(255,255,255,.12);line-height:1;}
+  .proj .ptag{font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:.7rem 0 .5rem;}
+  .proj h3{font-family:var(--disp);font-weight:500;font-size:1.35rem;letter-spacing:-.02em;margin-bottom:.6rem;}
+  .proj p{color:var(--mut);font-size:.88rem;line-height:1.7;margin-bottom:.9rem;}
+  .proj a{font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;color:var(--accent);text-decoration:none;}
+  .proj a:hover{color:var(--ink);}
 
-  .hero-left {
-    position: relative; z-index: 1;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    padding-right: 4vw;
-    border-right: 1px solid var(--line);
-  }
+  /* CLOSER + FOOTER */
+  .closer{padding:8rem 6vw;text-align:center;position:relative;}
+  .closer h2{font-family:var(--disp);font-weight:600;font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.03em;line-height:1;margin-bottom:0;}
+  .closer h2 .serif{font-family:var(--serif);font-style:italic;font-weight:400;background:linear-gradient(103deg,#FF5CA8,#FFB84D 48%,#6BFFB8);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .closer .links{display:flex;gap:.7rem;justify-content:center;margin-top:2.4rem;flex-wrap:wrap;}
+  .closer .links a{font-family:var(--mono);font-size:.78rem;color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:1rem 1.8rem;border-radius:100px;transition:.3s;}
+  .closer .links a:hover{background:var(--ink);color:var(--bg);}
+  .closer .links a.p{background:var(--accent);color:#2A0A1A;border-color:var(--accent);}
+  footer{margin-left:var(--rail);border-top:1px solid var(--line);padding:2rem 6vw;position:relative;z-index:2;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+    font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;}
 
-  .hero-eyebrow {
-    font-family: 'Fira Code', monospace;
-    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--accent); opacity: 0.8;
-    margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 0.75rem;
-    opacity: 0; transition: opacity 0.8s 0.3s;
-  }
-  .hero-eyebrow.on { opacity: 0.8; }
-  .hero-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); opacity: 0.6; }
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+  .reveal.on{opacity:1;transform:none;}
 
-  .hero h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(5rem, 10vw, 9rem);
-    font-weight: 700;
-    letter-spacing: -4px;
-    line-height: 0.95;
-    margin-bottom: 2.5rem;
+  @media(max-width:960px){
+    .cred-grid{grid-template-columns:1fr;gap:2rem;}
+    .ai-grid,.proj-grid{grid-template-columns:1fr;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(2){border-right:none;}
+    .stat:nth-child(1),.stat:nth-child(2){border-bottom:1px solid var(--line);}
+    .te{grid-template-columns:1fr;gap:.6rem;}
   }
-  .hero h1 em { font-style: italic; font-weight: 300; color: var(--accent); }
-
-  .hero-right {
-    position: relative; z-index: 1;
-    padding-left: 4vw;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    gap: 2.5rem;
+  @media(max-width:820px){
+    :root{--rail:0px;} .rail{display:none;} footer{margin-left:0;}
+    .topnav{top:1.1rem;right:5vw;gap:1rem;} .topnav a:not(.home){display:none;}
   }
-
-  .hero-desc {
-    font-size: 1rem; line-height: 1.85;
-    color: rgba(250,250,247,0.5);
-    max-width: 380px;
-  }
-  .hero-desc strong { color: rgba(250,250,247,0.82); font-weight: 600; }
-
-  .hero-chips {
-    display: flex; flex-wrap: wrap; gap: 0.45rem;
-  }
-  .hero-chip {
-    font-family: 'Fira Code', monospace; font-size: 0.68rem; letter-spacing: 0.05em;
-    padding: 0.35rem 0.85rem; border-radius: 100px;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    color: rgba(250,250,247,0.5);
-  }
-  .hero-chip.gold {
-    background: rgba(184,150,62,0.12); border-color: rgba(184,150,62,0.3);
-    color: var(--accent-light);
-  }
-
-  .hero-scroll-hint {
-    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-    font-family: 'Fira Code', monospace; font-size: 0.62rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(250,250,247,0.2);
-    z-index: 1;
-  }
-  .scroll-line {
-    width: 1px; height: 40px;
-    background: linear-gradient(to bottom, var(--accent), transparent);
-    animation: scroll-pulse 2s ease-in-out infinite;
-  }
-  @keyframes scroll-pulse {
-    0%, 100% { opacity: 0.4; transform: scaleY(1); }
-    50% { opacity: 1; transform: scaleY(1.15); }
-  }
-
-  /* ===== STATS STRIP ===== */
-  .stats-strip {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-bottom: 1px solid var(--line);
-  }
-  .stat-cell {
-    padding: 3rem 4vw;
-    border-right: 1px solid var(--line);
-    position: relative; overflow: hidden;
-  }
-  .stat-cell:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.8rem, 5vw, 4.5rem);
-    font-weight: 700; letter-spacing: -2px; line-height: 1;
-    color: var(--accent); margin-bottom: 0.5rem;
-    display: block;
-  }
-  .stat-lbl {
-    font-family: 'Fira Code', monospace; font-size: 0.65rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(250,250,247,0.28);
-  }
-  /* scan line animation on stat cells */
-  .stat-cell::after {
-    content: '';
-    position: absolute; left: 0; top: 0;
-    width: 100%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    transform: translateX(-100%);
-    transition: transform 0s;
-  }
-  .stat-cell.scanned::after {
-    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
-    transform: translateX(100%);
-  }
-
-  /* ===== SECTION COMMON ===== */
-  .section { padding: 7rem 4vw; border-bottom: 1px solid var(--line); }
-  .section-label {
-    font-family: 'Fira Code', monospace; font-size: 0.68rem;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--accent); opacity: 0.7;
-    margin-bottom: 0.6rem;
-  }
-  .section-heading {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    font-weight: 700; letter-spacing: -2px; line-height: 1.05;
-    margin-bottom: 4rem;
-  }
-  .section-heading em { font-style: italic; font-weight: 300; color: var(--accent); }
-
-  /* ===== EXPERIENCE ===== */
-  .exp-entry {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 0 4vw;
-    padding-bottom: 5rem;
-    margin-bottom: 5rem;
-    border-bottom: 1px solid var(--line);
-    position: relative;
-  }
-  .exp-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-
-  .exp-year-col {
-    position: relative;
-    padding-top: 0.3rem;
-  }
-  .exp-year-bg {
-    font-family: 'Fraunces', serif;
-    font-size: 7rem; font-weight: 700;
-    letter-spacing: -4px; line-height: 1;
-    color: rgba(184,150,62,0.07);
-    position: absolute; top: -1rem; left: -1rem;
-    pointer-events: none; user-select: none;
-    white-space: nowrap;
-  }
-  .exp-year {
-    font-family: 'Fira Code', monospace; font-size: 0.75rem;
-    letter-spacing: 0.1em; color: var(--accent);
-    position: relative; z-index: 1;
-  }
-  .exp-duration {
-    font-family: 'Fira Code', monospace; font-size: 0.62rem;
-    color: rgba(250,250,247,0.25); letter-spacing: 0.05em;
-    margin-top: 0.3rem; position: relative; z-index: 1;
-  }
-
-  .exp-content { position: relative; }
-  .exp-role {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
-    font-weight: 600; letter-spacing: -0.5px;
-    line-height: 1.15; margin-bottom: 0.35rem;
-  }
-  .exp-company {
-    font-family: 'Fira Code', monospace; font-size: 0.78rem;
-    color: var(--accent); letter-spacing: 0.05em; opacity: 0.85;
-    margin-bottom: 1.25rem;
-  }
-  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-  .exp-bullets li {
-    font-size: 0.9rem; line-height: 1.7;
-    color: rgba(250,250,247,0.5);
-    padding-left: 1.2rem; position: relative;
-  }
-  .exp-bullets li::before { content: '—'; position: absolute; left: 0; color: var(--accent); opacity: 0.5; }
-  .exp-bullets li strong { color: rgba(250,250,247,0.8); font-weight: 600; }
-
-  /* ===== CAPABILITIES MARQUEE ===== */
-  .cap-marquee-section {
-    padding: 3rem 0;
-    border-bottom: 1px solid var(--line);
-    overflow: hidden;
-    mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 5%, black 95%, transparent 100%);
-  }
-  .cap-marquee-inner {
-    display: flex; gap: 0; width: max-content;
-    animation: cap-scroll 35s linear infinite;
-  }
-  .cap-marquee-item {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 600; letter-spacing: -1px;
-    color: rgba(250,250,247,0.08);
-    white-space: nowrap;
-    padding: 0 2rem;
-  }
-  .cap-marquee-item.highlight { color: rgba(184,150,62,0.35); }
-  .cap-marquee-sep {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    color: rgba(184,150,62,0.2);
-    padding: 0 0.5rem;
-    align-self: center;
-  }
-  @keyframes cap-scroll {
-    0%   { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ===== CREDENTIALS SECTION ===== */
-  .cred-two-col {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 4vw;
-  }
-  .cred-block { }
-  .cred-block-title {
-    font-family: 'Fira Code', monospace; font-size: 0.66rem;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: rgba(250,250,247,0.25); margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--line); padding-bottom: 0.75rem;
-  }
-  .cred-item {
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .cred-item:last-child { border-bottom: none; }
-  .cred-name {
-    font-size: 0.95rem; font-weight: 600;
-    color: rgba(250,250,247,0.82); margin-bottom: 0.2rem;
-  }
-  .cred-sub {
-    font-size: 0.8rem; color: rgba(250,250,247,0.32); line-height: 1.5;
-  }
-
-  .tags-wrap { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tag {
-    font-family: 'Fira Code', monospace; font-size: 0.65rem;
-    padding: 0.28rem 0.65rem; border-radius: 6px;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
-    color: rgba(250,250,247,0.42); letter-spacing: 0.03em;
-    transition: all 0.25s;
-  }
-  .tag:hover { color: var(--paper); border-color: rgba(255,255,255,0.2); }
-  .tag.gold {
-    background: rgba(184,150,62,0.1); border-color: rgba(184,150,62,0.25);
-    color: var(--accent-light);
-  }
-
-  /* ===== AI SECTION ===== */
-  .ai-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
-  .ai-block {
-    padding: 2.5rem 3vw;
-    border-right: 1px solid var(--line);
-    position: relative; overflow: hidden;
-  }
-  .ai-block:first-child { border-left: 1px solid var(--line); }
-  .ai-num {
-    font-family: 'Fraunces', serif;
-    font-size: 5rem; font-weight: 700; line-height: 1;
-    color: rgba(184,150,62,0.1); letter-spacing: -3px;
-    margin-bottom: 1rem;
-    position: absolute; top: 1.5rem; right: 1.5rem;
-  }
-  .ai-label {
-    font-family: 'Fira Code', monospace; font-size: 0.65rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--accent); opacity: 0.7; margin-bottom: 0.75rem;
-  }
-  .ai-title {
-    font-family: 'Fraunces', serif; font-size: 1.3rem;
-    font-weight: 600; letter-spacing: -0.3px;
-    color: var(--paper); margin-bottom: 0.75rem;
-  }
-  .ai-body {
-    font-size: 0.85rem; line-height: 1.7;
-    color: rgba(250,250,247,0.42);
-  }
-
-  /* ===== PROJECTS ===== */
-  .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-  .proj-item {
-    padding: 2.5rem 3vw;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    position: relative; overflow: hidden;
-    transition: background 0.4s;
-  }
-  .proj-item:hover { background: rgba(255,255,255,0.02); }
-  .proj-item:nth-child(2n) { border-right: none; }
-  .proj-item:nth-last-child(-n+2) { border-bottom: none; }
-  .proj-num {
-    font-family: 'Fraunces', serif; font-size: 4rem;
-    font-weight: 700; letter-spacing: -2px; line-height: 1;
-    color: rgba(255,255,255,0.04); position: absolute;
-    top: 1rem; right: 1.5rem;
-  }
-  .proj-tag {
-    font-family: 'Fira Code', monospace; font-size: 0.65rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--accent); opacity: 0.75; margin-bottom: 0.6rem;
-  }
-  .proj-title {
-    font-family: 'Fraunces', serif; font-size: 1.2rem;
-    font-weight: 600; letter-spacing: -0.3px;
-    color: var(--paper); margin-bottom: 0.6rem;
-  }
-  .proj-body { font-size: 0.84rem; line-height: 1.65; color: rgba(250,250,247,0.4); }
-  .proj-link {
-    display: inline-flex; align-items: center; gap: 0.35rem;
-    font-family: 'Fira Code', monospace; font-size: 0.7rem;
-    letter-spacing: 0.05em; color: var(--accent); opacity: 0.65;
-    text-decoration: none; margin-top: 0.75rem;
-    transition: opacity 0.2s;
-  }
-  .proj-link:hover { opacity: 1; }
-
-  /* ===== FOOTER ===== */
-  footer {
-    padding: 5rem 4vw;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 2rem;
-  }
-  .footer-wordmark {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 700; letter-spacing: -3px; line-height: 1;
-    color: var(--paper);
-  }
-  .footer-wordmark span { color: var(--accent); }
-  .footer-right { text-align: right; }
-  .footer-right p {
-    font-family: 'Fira Code', monospace; font-size: 0.7rem;
-    letter-spacing: 0.08em; color: rgba(250,250,247,0.22);
-    margin-bottom: 0.5rem;
-  }
-  .footer-links { display: flex; gap: 1rem; justify-content: flex-end; margin-top: 1rem; }
-  .footer-links a {
-    font-family: 'Fira Code', monospace; font-size: 0.72rem;
-    color: var(--accent); opacity: 0.6; text-decoration: none;
-    transition: opacity 0.2s; letter-spacing: 0.05em;
-  }
-  .footer-links a:hover { opacity: 1; }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; padding: 9rem 1.5rem 5rem; gap: 3rem; }
-    .hero-left { border-right: none; border-bottom: 1px solid var(--line); padding-right: 0; padding-bottom: 3rem; }
-    .hero-right { padding-left: 0; }
-    .stats-strip { grid-template-columns: repeat(2, 1fr); }
-    .stat-cell:nth-child(2) { border-right: none; }
-    .stat-cell:nth-child(3) { border-top: 1px solid var(--line); }
-    .exp-entry { grid-template-columns: 1fr; gap: 0.5rem 0; }
-    .exp-year-bg { font-size: 4rem; }
-    .cred-two-col { grid-template-columns: 1fr; gap: 2.5rem; }
-    .ai-three { grid-template-columns: 1fr; }
-    .ai-block { border-right: none; border-left: none; border-bottom: 1px solid var(--line); }
-    .ai-block:first-child { border-left: none; }
-    .proj-grid { grid-template-columns: 1fr; }
-    .proj-item { border-right: none; border-bottom: 1px solid var(--line); }
-    .proj-item:last-child { border-bottom: none; }
-    footer { grid-template-columns: 1fr; }
-    .footer-right { text-align: left; }
-    .footer-links { justify-content: flex-start; }
-    .section { padding: 5rem 1.5rem; }
-  }
-  @media (max-width: 480px) {
-    .stats-strip { grid-template-columns: 1fr 1fr; }
-    .hero h1 { letter-spacing: -3px; }
-    .section-heading { letter-spacing: -1.5px; }
-  }
+  @media (prefers-reduced-motion: reduce){*{transition-duration:.01ms!important;} .reveal{opacity:1;transform:none;}}
 </style>
 </head>
 <body>
 
-<div class="grain" aria-hidden="true"></div>
+<div class="wash"></div>
+<div class="vignette"></div>
+<div class="grain"></div>
 
-<!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-logo">Jimi Visser<span>.</span></a>
-  <div class="nav-div"></div>
-  <a href="index.html" class="nav-back">Portfolio</a>
+<aside class="rail">
+  <a href="index.html" class="mark">J</a>
+  <div class="vname">Jimi Visser · Background</div>
+  <div class="soc">
+    <a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:jimivisser@gmail.com">Email</a>
+  </div>
+</aside>
+
+<nav class="topnav">
+  <a href="index.html#work">Work</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills">Skills</a>
+  <a href="index.html" class="home">← Portfolio</a>
 </nav>
 
-<div id="smooth-wrapper">
-<div id="smooth-content">
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="hero-grid" aria-hidden="true"></div>
-  <div class="hero-streak" aria-hidden="true"></div>
-
-  <div class="hero-left">
-    <div class="hero-eyebrow" id="heroEye">Background &amp; Experience</div>
-    <h1>
-      <span class="h1-line"><span class="h1-inner d1">The</span></span>
-      <span class="h1-line"><span class="h1-inner d2">full</span></span>
-      <span class="h1-line"><span class="h1-inner d3"><em>picture.</em></span></span>
-    </h1>
-  </div>
-
-  <div class="hero-right">
-    <p class="hero-desc reveal d1">
-      Account manager who bridges <strong>strategy, creative, and production</strong> with an AI-first mindset. At Ogilvy I lead cross-market client delivery and drive AI adoption. On the side I build ventures from scratch.
-    </p>
-    <div class="hero-chips reveal d2">
-      <span class="hero-chip gold">Cannes Lions '20</span>
-      <span class="hero-chip">NIMA B Certified</span>
-      <span class="hero-chip">Cambridge C2</span>
-      <span class="hero-chip">Claude AI (in progress)</span>
+<main>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="kicker reveal">Background &amp; Experience</div>
+    <h1 class="reveal">The full <span class="serif">picture.</span></h1>
+    <p class="bio reveal">I'm a <b>commercial producer</b> and Executive Producer at <b>WPP Production Nordics</b>, working directly with the CEO to set up studio and production capabilities for all Dutch Ogilvy agencies — collaborating with WPP Production offices across Europe and the UK. Most recently <b>Executive Producer, Transcreation</b> on JDE Peet's global 'Official Sponsor of Staying Awake' campaign across 18 markets. On the side, I build ventures from scratch.</p>
+    <div class="chips reveal">
+      <span class="gold">★ Silver Lion, Cannes '26</span>
+      <span class="gold">Cannes Lions '20</span>
+      <span>NIMA B Certified</span>
+      <span>Cambridge C2 English</span>
+      <span>Claude AI (in progress)</span>
     </div>
+  </header>
+
+  <!-- STATS -->
+  <div class="stats reveal">
+    <div class="stat"><b>1×</b><span>Cannes Lion</span></div>
+    <div class="stat"><b>18</b><span>Markets · JDE</span></div>
+    <div class="stat"><b>25</b><span>Crew managed</span></div>
+    <div class="stat"><b>15+</b><span>Brands produced</span></div>
   </div>
 
-  <div class="hero-scroll-hint" aria-hidden="true">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
+  <!-- EXPERIENCE -->
+  <section class="sec" id="experience">
+    <div class="eyebrow reveal">Work History</div>
+    <h2 class="reveal">Experience</h2>
 
-<!-- STATS STRIP -->
-<div class="stats-strip">
-  <div class="stat-cell reveal d1">
-    <span class="stat-num" data-target="850" data-prefix="€" data-suffix="K">€0K</span>
-    <span class="stat-lbl">Single project budget</span>
-  </div>
-  <div class="stat-cell reveal d2">
-    <span class="stat-num" data-target="25">0</span>
-    <span class="stat-lbl">Production crew managed</span>
-  </div>
-  <div class="stat-cell reveal d3">
-    <span class="stat-num" data-target="6">0</span>
-    <span class="stat-lbl">Direct reports led</span>
-  </div>
-  <div class="stat-cell reveal d4">
-    <span class="stat-num" data-target="4">0</span>
-    <span class="stat-lbl">Years at DPPLR</span>
-  </div>
-</div>
-
-<!-- CAPABILITIES MARQUEE -->
-<div class="cap-marquee-section" aria-hidden="true">
-  <div class="cap-marquee-inner">
-    <span class="cap-marquee-item highlight">Account Management</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Executive Production</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item highlight">AI Automation</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Brand Strategy</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item highlight">360° Campaigns</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Client Delivery</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item highlight">Film Production</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Cross-Market</span><span class="cap-marquee-sep">·</span>
-    <!-- duplicate -->
-    <span class="cap-marquee-item highlight">Account Management</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Executive Production</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item highlight">AI Automation</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Brand Strategy</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item highlight">360° Campaigns</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Client Delivery</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item highlight">Film Production</span><span class="cap-marquee-sep">·</span>
-    <span class="cap-marquee-item">Cross-Market</span><span class="cap-marquee-sep">·</span>
-  </div>
-</div>
-
-<!-- EXPERIENCE -->
-<section class="section">
-  <div class="section-label reveal">Work History</div>
-  <h2 class="section-heading clip-reveal d1">Experience</h2>
-
-  <div class="exp-entry">
-    <div class="exp-year-col reveal d1">
-      <div class="exp-year-bg">2024</div>
-      <div class="exp-year">2024 — Now</div>
-      <div class="exp-duration">1+ year</div>
-    </div>
-    <div class="exp-content reveal d2">
-      <div class="exp-role">Account Manager</div>
-      <div class="exp-company">Ogilvy Amsterdam</div>
-      <ul class="exp-bullets">
-        <li>Own end-to-end client delivery for CJ CheilJedang (Bibigo) — built account structure from scratch, coordinating South Korean client, APAC hub Singapore, and local production</li>
-        <li><strong>Two campaigns in international press</strong> (LBBOnline, Famous Campaigns, Roastbrief): Loods 5 'Showroom on Ice' (30% sales uplift, 2.8M reach) and Testicular Cancer Foundation</li>
-        <li>Leading AI adoption across account operations — automated briefing, reporting, and tracking using Claude, cutting turnaround times on recurring deliverables</li>
-        <li>Account support on Ford (European localisation), Zwitsal, Prodent, and AkzoNobel European brand playbooks</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="exp-entry">
-    <div class="exp-year-col reveal d1">
-      <div class="exp-year-bg">2020</div>
-      <div class="exp-year">2020 — 2024</div>
-      <div class="exp-duration">4 years</div>
-    </div>
-    <div class="exp-content reveal d2">
-      <div class="exp-role">Producer → EP → Creative Dev. &amp; Growth</div>
-      <div class="exp-company">DPPLR</div>
-      <ul class="exp-bullets">
-        <li><strong>Promoted 3× in 4 years</strong>: Producer → Executive Producer → Creative Development &amp; Growth lead</li>
-        <li>Led teams of up to 6 direct reports in-house; freelance crews of 25 on set; single-project budgets up to <strong>€850K</strong></li>
-        <li>Executive Produced feature film 'Alice' — full lifecycle from pre-production to delivery across 5 months</li>
-        <li>Built new business pipeline through upselling and prospecting; introduced systems cutting turnaround by ~30%</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="exp-entry">
-    <div class="exp-year-col reveal d1">
-      <div class="exp-year-bg">2019</div>
-      <div class="exp-year">2019 — 2021</div>
-      <div class="exp-duration">Freelance</div>
-    </div>
-    <div class="exp-content reveal d2">
-      <div class="exp-role">Freelance Producer &amp; Consultant</div>
-      <div class="exp-company">BEP+Schnitzel · Ad.Business · Google (via Cannes Lions)</div>
-      <ul class="exp-bullets">
-        <li>Production management across multiple clients; developed strategic concept for Google as Netherlands representative at Cannes Lions Roger Hatchuel Academy 2020</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- CREDENTIALS -->
-<section class="section">
-  <div class="section-label reveal">Credentials</div>
-  <h2 class="section-heading clip-reveal d1">Education &amp; <em>Skills</em></h2>
-
-  <div class="cred-two-col">
-    <div>
-      <div class="cred-block-title reveal">Education &amp; Certifications</div>
-      <div class="cred-item reveal d1">
-        <div class="cred-name">Marketing &amp; Communication (Bachelor)</div>
-        <div class="cred-sub">The New School Amsterdam</div>
-      </div>
-      <div class="cred-item reveal d2">
-        <div class="cred-name">NIMA A &amp; NIMA B Marketing</div>
-        <div class="cred-sub">Netherlands Institute of Marketing — EMC-accredited, EQF Level 6</div>
-      </div>
-      <div class="cred-item reveal d3">
-        <div class="cred-name">Anthropic Claude Certification</div>
-        <div class="cred-sub">In progress — prompt engineering, API integration, AI workflow design</div>
-      </div>
-      <div class="cred-item reveal d4">
-        <div class="cred-name">Cambridge CPE (C2 Proficiency)</div>
-        <div class="cred-sub">Native-level English · Dutch Professional</div>
+    <div class="te reveal">
+      <div><div class="yr">2025 — Now</div><div class="now-tag">Current</div></div>
+      <div>
+        <h3>Executive Producer</h3>
+        <div class="co">WPP Production Nordics</div>
+        <ul>
+          <li>Working <b>directly with the CEO</b>, setting up studio &amp; production capabilities for all Dutch Ogilvy agencies</li>
+          <li><b>Executive Producer, Transcreation</b> on JDE Peet's 'Official Sponsor of Staying Awake' — one idea localised across 18 markets and 11 coffee brands</li>
+          <li>First productions for <b>Andrelon, Grolsch and Ixi</b> through Ogilvy Production</li>
+          <li>Collaborating with WPP Production offices across <b>Europe and the UK</b> to build integrated production workflows</li>
+        </ul>
       </div>
     </div>
 
-    <div>
-      <div class="cred-block-title reveal">Core Capabilities</div>
-      <div class="tags-wrap reveal d1" style="margin-bottom: 2rem;">
-        <span class="tag gold">AI Tools &amp; Automation</span>
-        <span class="tag gold">Claude / LLM Workflows</span>
-        <span class="tag">Client Strategy</span>
-        <span class="tag">Project Delivery</span>
-        <span class="tag">Production Management</span>
-        <span class="tag">Budget Ownership (€850K+)</span>
-        <span class="tag">Team Leadership</span>
-        <span class="tag">Cross-Market Delivery</span>
-        <span class="tag">Pitch Development</span>
-        <span class="tag">App Development</span>
-      </div>
-      <div class="cred-block-title reveal" style="margin-top: 2rem;">Key Clients</div>
-      <div class="tags-wrap reveal d2">
-        <span class="tag">Ford</span>
-        <span class="tag">AkzoNobel</span>
-        <span class="tag">Bibigo (CJ CheilJedang)</span>
-        <span class="tag">Unilever</span>
-        <span class="tag">Loods 5</span>
-        <span class="tag">A.Vogel</span>
-        <span class="tag">Klene</span>
-        <span class="tag">bol.com</span>
-        <span class="tag">DJI</span>
-        <span class="tag">Bridgefund</span>
-        <span class="tag">Google</span>
+    <div class="te reveal">
+      <div><div class="yr">2024 — 2025</div><div class="dur">1+ year</div></div>
+      <div>
+        <h3>Account Manager</h3>
+        <div class="co">Ogilvy Amsterdam</div>
+        <ul>
+          <li>End-to-end client delivery for <b>CJ CheilJedang (Bibigo)</b> — built the account from scratch across the Korean client, APAC hub and local production</li>
+          <li><b>Two campaigns in international press</b>: Loods 5 'Showroom on Ice' (<b>Silver Lion, Cannes</b>, 30% sales uplift, 2.8M reach) and the Testicular Cancer Foundation</li>
+          <li>Account lead across <b>Ford, Zwitsal, Prodent</b> and AkzoNobel European brand playbooks</li>
+          <li>Led AI adoption across account operations — automated briefing, reporting and tracking with Claude</li>
+        </ul>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- AI PROFICIENCY -->
-<section class="section" style="padding-left: 0; padding-right: 0;">
-  <div style="padding: 0 4vw;">
-    <div class="section-label reveal">Technology</div>
-    <h2 class="section-heading clip-reveal d1">AI <em>Proficiency</em></h2>
-  </div>
-  <div class="ai-three">
-    <div class="ai-block reveal d1">
-      <div class="ai-num">01</div>
-      <div class="ai-label">// Prompting</div>
-      <div class="ai-title">Prompt Engineering</div>
-      <p class="ai-body">Advanced prompting across Claude, GPT, and other LLMs. Pursuing official Anthropic certification. Building structured AI workflows for client-facing deliverables.</p>
+    <div class="te reveal">
+      <div><div class="yr">2020 — 2024</div><div class="dur">4 years</div></div>
+      <div>
+        <h3>Producer → EP → Creative Dev. &amp; Growth</h3>
+        <div class="co">DPPLR</div>
+        <ul>
+          <li><b>Promoted 3× in 4 years</b>: Producer → Executive Producer → Creative Development &amp; Growth lead</li>
+          <li>Led teams of up to 6 in-house and freelance crews of 25 on set, from guerrilla shorts to feature film</li>
+          <li>Produced commercials for A.Vogel, Klene, bol.com, DJI and Bridgefund; Executive Producer on feature film <b>'Alice'</b></li>
+          <li>Built the new-business pipeline through upselling and prospecting; introduced systems that cut turnaround ~30%</li>
+        </ul>
+      </div>
     </div>
-    <div class="ai-block reveal d2">
-      <div class="ai-num">02</div>
-      <div class="ai-label">// Building</div>
-      <div class="ai-title">AI-Assisted Development</div>
-      <p class="ai-body">Using Claude Code to build functional applications from concept to working product — no traditional dev background. First self-built app: location-based social tool.</p>
-    </div>
-    <div class="ai-block reveal d3">
-      <div class="ai-num">03</div>
-      <div class="ai-label">// Automation</div>
-      <div class="ai-title">Workflow Automation</div>
-      <p class="ai-body">Integrating AI into account management, client reporting, performance tracking, and production workflows. Reduced manual overhead on recurring deliverables at Ogilvy.</p>
-    </div>
-  </div>
-</section>
 
-<!-- NOTABLE PROJECTS -->
-<section class="section" style="padding-left: 0; padding-right: 0;">
-  <div style="padding: 0 4vw 3rem;">
-    <div class="section-label reveal">Selected</div>
-    <h2 class="section-heading clip-reveal d1" style="margin-bottom: 0;">Notable <em>Projects</em></h2>
-  </div>
-  <div class="proj-grid">
-    <div class="proj-item reveal d1">
-      <div class="proj-num">01</div>
-      <div class="proj-tag">2020 · Netherlands Representative</div>
-      <div class="proj-title">Cannes Lions Roger Hatchuel Academy</div>
-      <p class="proj-body">Global programme for next-gen creative leaders. Developed a strategic brand positioning project for Google as the sole Netherlands representative.</p>
-      <a href="https://www.canneslions.com/learning/academies/roger-hatchuel" target="_blank" rel="noopener" class="proj-link">Cannes Lions ↗</a>
+    <div class="te reveal">
+      <div><div class="yr">2019 — 2021</div><div class="dur">Freelance</div></div>
+      <div>
+        <h3>Freelance Producer &amp; Consultant</h3>
+        <div class="co">BEP+Schnitzel · Ad.Business · Google (via Cannes Lions)</div>
+        <ul>
+          <li>Production management across multiple clients; developed a strategic concept for Google as Netherlands representative at Cannes Lions Roger Hatchuel Academy 2020</li>
+        </ul>
+      </div>
     </div>
-    <div class="proj-item reveal d2">
-      <div class="proj-num">02</div>
-      <div class="proj-tag">2023 · Executive Producer at DPPLR</div>
-      <div class="proj-title">Feature Film: Alice</div>
-      <p class="proj-body">Full executive production of a feature film — cast, crew, budget, and post-production across 5 months. Screened at Austin Film Festival 2025 as 'Kind'.</p>
-      <a href="https://www.dpplr.nl/projects/alice/" target="_blank" rel="noopener" class="proj-link">DPPLR ↗</a>
-    </div>
-    <div class="proj-item reveal d3">
-      <div class="proj-num">03</div>
-      <div class="proj-tag">2020 · Concept &amp; Identity Design</div>
-      <div class="proj-title">Epica Creative Circles</div>
-      <p class="proj-body">Designed marketing communications and corporate identity for the conference preceding the Epica Awards — Europe's largest creative festival judged by journalists.</p>
-    </div>
-    <div class="proj-item reveal d4">
-      <div class="proj-num">04</div>
-      <div class="proj-tag">Business School Berlin/Hamburg</div>
-      <div class="proj-title">Future of Education Programme</div>
-      <p class="proj-body">International programme on digitalisation in education. Co-created a platform concept connecting industry partners and students at scale.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-wordmark reveal">Jimi Visser<span>.</span></div>
-  <div class="footer-right reveal d1">
-    <p>Amsterdam &nbsp;·&nbsp; Account Manager &nbsp;·&nbsp; AI Project Lead</p>
-    <p>Currently: Ogilvy Amsterdam</p>
-    <div class="footer-links">
-      <a href="index.html">Portfolio</a>
+  <!-- SKILLS / CREDENTIALS -->
+  <section class="sec alt" id="skills">
+    <div class="eyebrow reveal">Credentials</div>
+    <h2 class="reveal">Education &amp; <span class="serif">skills</span></h2>
+    <div class="cred-grid">
+      <div>
+        <div class="cred-title reveal">Education &amp; Certifications</div>
+        <div class="cred-item reveal"><div class="cn">Marketing &amp; Communication (Bachelor)</div><div class="cs">The New School, Amsterdam</div></div>
+        <div class="cred-item reveal"><div class="cn">NIMA A &amp; NIMA B Marketing</div><div class="cs">Netherlands Institute of Marketing — EQF Level 6</div></div>
+        <div class="cred-item reveal"><div class="cn">Anthropic Claude Certification</div><div class="cs">In progress — prompt engineering, API integration, AI workflow design</div></div>
+        <div class="cred-item reveal"><div class="cn">Cambridge CPE (C2 Proficiency)</div><div class="cs">Native-level English · Dutch professional</div></div>
+      </div>
+      <div>
+        <div class="cred-title reveal">Core Capabilities</div>
+        <div class="tags reveal" style="margin-bottom:1.75rem;">
+          <span class="tag gold">Commercial Production</span>
+          <span class="tag gold">Executive Production</span>
+          <span class="tag gold">Brand Campaigns</span>
+          <span class="tag gold">AI Tools &amp; Automation</span>
+          <span class="tag">Transcreation</span>
+          <span class="tag">Studio Operations</span>
+          <span class="tag">360° Campaigns</span>
+          <span class="tag">Client Strategy</span>
+          <span class="tag">Project Delivery</span>
+          <span class="tag">Budget Ownership</span>
+          <span class="tag">Team Leadership</span>
+          <span class="tag">Cross-Market Delivery</span>
+          <span class="tag">Pitch Development</span>
+          <span class="tag">Film Production</span>
+        </div>
+        <div class="cred-title reveal">Key Clients</div>
+        <div class="tags reveal">
+          <span class="tag">JDE Peet's</span><span class="tag">Unilever</span><span class="tag">Ford</span>
+          <span class="tag">AkzoNobel</span><span class="tag">Bibigo (CJ)</span><span class="tag">Loods 5</span>
+          <span class="tag">Andrelon</span><span class="tag">Grolsch</span><span class="tag">Prodent</span>
+          <span class="tag">Zwitsal</span><span class="tag">A.Vogel</span><span class="tag">Klene</span>
+          <span class="tag">bol.com</span><span class="tag">DJI</span><span class="tag">Bridgefund</span><span class="tag">Google</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI PROFICIENCY -->
+  <section class="sec">
+    <div class="eyebrow reveal">Technology</div>
+    <h2 class="reveal">AI <span class="serif">proficiency</span></h2>
+    <div class="ai-grid">
+      <div class="ai-card reveal"><div class="num">01</div><div class="lbl">// Prompting</div><h3>Prompt Engineering</h3><p>Advanced prompting across Claude, GPT and other LLMs. Pursuing official Anthropic certification. Building structured AI workflows for client-facing deliverables.</p></div>
+      <div class="ai-card reveal"><div class="num">02</div><div class="lbl">// Building</div><h3>AI-Assisted Development</h3><p>Using Claude Code to build functional applications from concept to working product — no traditional dev background. First self-built app: a location-based social tool.</p></div>
+      <div class="ai-card reveal"><div class="num">03</div><div class="lbl">// Automation</div><h3>Workflow Automation</h3><p>Integrating AI into production management, client reporting, performance tracking and studio workflows — including transcreation at scale.</p></div>
+    </div>
+  </section>
+
+  <!-- NOTABLE PROJECTS -->
+  <section class="sec alt">
+    <div class="eyebrow reveal">Selected</div>
+    <h2 class="reveal">Notable <span class="serif">projects</span></h2>
+    <div class="proj-grid">
+      <div class="proj reveal">
+        <div class="pnum">01</div>
+        <div class="ptag">2026 · JDE Peet's · 18 markets</div>
+        <h3>Official Sponsor of Staying Awake</h3>
+        <p>Executive Producer, Transcreation on JDE Peet's global football platform — one idea localised across 18 markets and 11 coffee brands, making coffee (not beer) the fuel for late-night matches.</p>
+        <a href="https://lbbonline.com/news/JDE-Peets-Late-night-Football-Coffee-Platform" target="_blank" rel="noopener">LBBOnline ↗</a>
+      </div>
+      <div class="proj reveal">
+        <div class="pnum">02</div>
+        <div class="ptag">2026 · Silver Lion, Cannes</div>
+        <h3>Loods 5 — Showroom on Ice</h3>
+        <p>Turned an ice rink into a shoppable furniture showroom. 30% sales uplift, 2.8M press reach and a Silver Lion at Cannes Lions 2026.</p>
+        <a href="https://lbbonline.com/news/Loods-5-Showroom-on-Ice" target="_blank" rel="noopener">LBBOnline ↗</a>
+      </div>
+      <div class="proj reveal">
+        <div class="pnum">03</div>
+        <div class="ptag">2020 · Netherlands representative</div>
+        <h3>Cannes Lions Roger Hatchuel Academy</h3>
+        <p>Global programme for next-gen creative leaders. Developed a strategic brand positioning project for Google as the sole Netherlands representative.</p>
+        <a href="https://www.canneslions.com/learning/academies/roger-hatchuel" target="_blank" rel="noopener">Cannes Lions ↗</a>
+      </div>
+      <div class="proj reveal">
+        <div class="pnum">04</div>
+        <div class="ptag">2025 · Executive Producer · DPPLR</div>
+        <h3>Feature Film: Alice</h3>
+        <p>Full executive production of a feature film — cast, crew, budget and post across five months. Screened at Austin Film Festival 2025 as 'Kind'.</p>
+        <a href="https://horrorfuel.com/2025/11/12/spoiler-free-review-kind-austin-film-festival-2025/" target="_blank" rel="noopener">Review ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSER -->
+  <section class="closer">
+    <div class="eyebrow reveal" style="justify-content:center;">Get in touch</div>
+    <h2 class="reveal">Let's make<br>something <span class="serif">move.</span></h2>
+    <div class="links reveal">
+      <a href="mailto:jimivisser@gmail.com" class="p">jimivisser@gmail.com →</a>
       <a href="https://www.linkedin.com/in/jimi-visser-account-management-ogilvy" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="index.html">← Portfolio</a>
     </div>
-  </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Jimi Visser · Amsterdam</span>
+  <span>Commercial Producer · WPP Production Nordics</span>
 </footer>
 
-</div><!-- /smooth-content -->
-</div><!-- /smooth-wrapper -->
-
 <script>
-  // ===== GRAIN =====
-  (function() {
-    const grain = document.querySelector('.grain');
-    if (!grain) return;
-    const canvas = document.createElement('canvas');
-    grain.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    const SIZE = 180;
-    const off = document.createElement('canvas');
-    off.width = off.height = SIZE;
-    const octx = off.getContext('2d');
-    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    let tick = 0;
-    function draw() {
-      tick++;
-      if (tick % 3 === 0) {
-        const d = octx.createImageData(SIZE, SIZE);
-        for (let i = 0; i < d.data.length; i += 4) {
-          const v = (Math.random() * 255) | 0;
-          d.data[i] = d.data[i+1] = d.data[i+2] = v;
-          d.data[i+3] = 6;
-        }
-        octx.putImageData(d, 0, 0);
-      }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = ctx.createPattern(off, 'repeat');
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      requestAnimationFrame(draw);
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-    requestAnimationFrame(draw);
-  })();
-
-  // ===== SMOOTH SCROLL (Lenis-style, no library) =====
-  (function() {
-    const wrapper = document.getElementById('smooth-wrapper');
-    const content = document.getElementById('smooth-content');
-    if (!wrapper || !content) return;
-
-    let current = 0, target = 0, raf;
-    const ease = 0.085;
-
-    function resize() {
-      document.body.style.height = content.getBoundingClientRect().height + 'px';
-    }
-
-    window.addEventListener('scroll', () => { target = window.scrollY; }, { passive: true });
-
-    function loop() {
-      current += (target - current) * ease;
-      if (Math.abs(target - current) < 0.1) current = target;
-      content.style.transform = `translateY(${-current}px)`;
-      raf = requestAnimationFrame(loop);
-    }
-
-    resize();
-    new ResizeObserver(resize).observe(content);
-    loop();
-  })();
-
-  // ===== SCROLL ANIMATIONS =====
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .clip-reveal').forEach(el => obs.observe(el));
-
-  // H1 on load
-  setTimeout(() => {
-    document.getElementById('heroEye')?.classList.add('on');
-    document.querySelectorAll('.h1-inner').forEach(el => el.classList.add('on'));
-    document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('on'));
-  }, 150);
-
-  // ===== COUNTUP =====
-  const countObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (!e.isIntersecting || e.target.dataset.counted) return;
-      e.target.dataset.counted = '1';
-      const target = parseInt(e.target.dataset.target);
-      const prefix = e.target.dataset.prefix || '';
-      const suffix = e.target.dataset.suffix || '';
-      const start = performance.now();
-      const ease = t => 1 - Math.pow(1 - t, 3);
-      // Trigger scan line on parent
-      e.target.closest('.stat-cell')?.classList.add('scanned');
-      (function loop(now) {
-        const t = Math.min((now - start) / 1600, 1);
-        e.target.textContent = prefix + Math.round(ease(t) * target) + suffix;
-        if (t < 1) requestAnimationFrame(loop);
-      })(start);
-    });
-  }, { threshold: 0.5 });
-
-  document.querySelectorAll('.stat-num[data-target]').forEach(el => countObs.observe(el));
-
-  // ===== SCROLL VELOCITY SKEW =====
-  (function() {
-    const targets = document.querySelectorAll('.exp-entry, .proj-grid, .ai-three, .cred-two-col');
-    let lastY = 0, skew = 0;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      skew += (y - lastY) * 0.05;
-      lastY = y;
-    }, { passive: true });
-    (function loop() {
-      skew *= 0.88;
-      const s = Math.max(-1.8, Math.min(1.8, skew));
-      targets.forEach(el => { el.style.transform = `skewY(${s.toFixed(3)}deg)`; });
-      requestAnimationFrame(loop);
-    })();
-  })();
-
-  // ===== CURSOR GLOW =====
-  (function() {
-    if (window.matchMedia('(pointer: coarse)').matches) return;
-    const glow = document.createElement('div');
-    glow.style.cssText = 'position:fixed;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(184,150,62,0.055) 0%,transparent 70%);pointer-events:none;z-index:1;transform:translate(-50%,-50%);mix-blend-mode:screen;will-change:left,top;';
-    document.body.appendChild(glow);
-    let cx = -1000, cy = -1000, tx = -1000, ty = -1000;
-    document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY; });
-    (function loop() {
-      cx += (tx - cx) * 0.07; cy += (ty - cy) * 0.07;
-      glow.style.left = cx + 'px'; glow.style.top = cy + 'px';
-      requestAnimationFrame(loop);
-    })();
-  })();
+  const io=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
 </body>
 </html>
