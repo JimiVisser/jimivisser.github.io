@@ -26,7 +26,9 @@
     --rail:76px;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth;scroll-snap-type:y proximity;}
+  main > *{scroll-snap-align:start;scroll-snap-stop:always;}
+  @media (prefers-reduced-motion: reduce){html{scroll-snap-type:none;}}
   body{font-family:var(--sans);background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
   a{color:inherit;}
   ::selection{background:rgba(255,92,168,.28);}
