@@ -226,6 +226,23 @@
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
     font-family:var(--mono);font-size:.6rem;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;}
 
+
+  /* ===== APPLICATION BAR (shown only via ?netflix or after visiting the application page) ===== */
+  .apply-band{display:none;position:fixed;left:calc(var(--rail) + 6vw);right:6vw;bottom:1.2rem;z-index:70;align-items:center;gap:1.1rem;flex-wrap:wrap;
+    padding:.75rem .8rem .75rem 1.2rem;border-radius:100px;background:rgba(11,11,11,.86);backdrop-filter:blur(16px);
+    border:1px solid rgba(229,9,20,.5);box-shadow:0 20px 60px rgba(0,0,0,.55);}
+  .apply-band.on{display:flex;}
+  .apply-band .ab-tag{font-family:var(--mono);font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;background:#E50914;padding:.35rem .7rem;border-radius:100px;}
+  .apply-band b{font-family:var(--disp);font-weight:500;font-size:1rem;letter-spacing:-.01em;}
+  .apply-band .ab-links{display:flex;gap:.4rem;flex-wrap:wrap;margin-left:auto;}
+  .apply-band .ab-links a{font-family:var(--mono);font-size:.64rem;letter-spacing:.04em;color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:.5rem .9rem;border-radius:100px;transition:.25s;}
+  .apply-band .ab-links a:hover{background:var(--ink);color:#060509;}
+  .apply-band .ab-links a.p{background:#E50914;border-color:#E50914;color:#fff;}
+  .apply-band .ab-links a.p:hover{background:#fff;border-color:#fff;color:#060509;}
+  .apply-band .ab-x{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--mut);cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:.2s;}
+  .apply-band .ab-x:hover{color:var(--ink);border-color:var(--ink);}
+  @media(max-width:820px){.apply-band{left:4vw;right:4vw;bottom:.8rem;border-radius:18px;padding:.9rem 1rem;gap:.7rem;}.apply-band .ab-links{margin-left:0;width:100%;}.apply-band .ab-x{position:absolute;top:.6rem;right:.6rem;}}
+
   /* ===== VIDEO MODAL ===== */
   .modal{display:none;position:fixed;inset:0;z-index:1000;background:rgba(6,5,9,.92);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:2rem;}
   .modal.on{display:flex;}
@@ -293,7 +310,7 @@
     <div class="hero-play" role="button" tabindex="0" aria-label="Watch the Silver Lion case film" data-vimeo="1166962676"></div>
     <div class="kicker"><span class="dot"></span> Growth Lead · WPP Production</div>
     <h1><span class="out">MAKING</span><br>IDEAS <span class="serif">move.</span></h1>
-    <p class="lede">I'm Jimi Visser, a <b>commercial producer</b> in Amsterdam who scopes, produces and grows brand work at scale. From a <b>Silver Lion</b>–winning retail stunt to a campaign transcreated across <b>18 markets</b>, I turn ambition into produced reality.</p>
+    <p class="lede">I'm Jimi Visser, a <b>commercial producer</b> in Amsterdam who scopes, produces and grows brand work at scale. From a <b>Silver Lion</b> winning retail stunt to a campaign transcreated across <b>18 markets</b>, I turn ambition into produced reality.</p>
     <div class="scrollcue">Scroll · selected work</div>
   </header>
 
@@ -321,7 +338,7 @@
         <div class="wfeat-tag">JDE Peet's · Ogilvy / WPP · Global</div>
         <h3>Official Sponsor of<br><span class="serif">Staying Awake.</span></h3>
         <div class="wfeat-role">Transcreation Lead</div>
-        <p>JDE Peet's global football platform that makes coffee, not beer, the fuel for late-night matches. One idea, transcreated across the group's local coffee brands and markets on four continents.</p>
+        <p>JDE Peet's global football platform that makes coffee, not beer, the fuel for late night matches. One idea, transcreated across the group's local coffee brands and markets on four continents.</p>
         <div class="wfeat-stats">
           <div><b>18</b><span>markets</span></div>
           <div><b>11</b><span>coffee brands</span></div>
@@ -448,8 +465,8 @@
           <div class="co">DPPLR</div>
           <ul>
             <li><b>Promoted 3× in 4 years</b>, leading teams of 6 and crews of 25, from guerrilla shorts to feature film</li>
-            <li>Produced across commercials, shorts and feature film, including Gouden Kalf-winning <b>'Pantser'</b> and feature <b>'Alice'</b></li>
-            <li>Built the new-business pipeline; introduced systems that cut turnaround ~30%</li>
+            <li>Produced across commercials, shorts and feature film, including the Gouden Kalf winning <b>'Pantser'</b> and feature <b>'Alice'</b></li>
+            <li>Built the new business pipeline; introduced systems that cut turnaround by roughly 30%</li>
           </ul>
         </div>
       </div>
@@ -473,14 +490,14 @@
       <div class="vcard reveal" style="--vc:#FF5CA8">
         <h3>Studio 1104</h3>
         <div class="vt">Founder · Media Startup</div>
-        <p>Vertical video content addressing social issues for teenagers (12–15). AI-powered from ideation to production, licensed to Dutch schools.</p>
+        <p>Vertical video content addressing social issues for teenagers (12–15). AI powered from ideation to production, licensed to Dutch schools.</p>
         <div class="vtags"><span>AI Production</span><span>Vertical Video</span><span>Social Impact</span><span>EdTech</span></div>
       </div>
       <div class="vcard reveal" style="--vc:#5B8CFF">
-        <h3>Location-Based Social App</h3>
+        <h3>Location Based Social App</h3>
         <div class="vt">Creator · In Development</div>
-        <p>First self-built application: a location-based tool mapping business social followings into a map interface. Built with AI-assisted coding.</p>
-        <div class="vtags"><span>AI-Assisted Dev</span><span>Location Intelligence</span><span>Product Design</span></div>
+        <p>First self built application: a location based tool mapping business social followings into a map interface. Built with AI assisted coding.</p>
+        <div class="vtags"><span>AI Assisted Dev</span><span>Location Intelligence</span><span>Product Design</span></div>
       </div>
     </div>
   </section>
@@ -501,6 +518,19 @@
   <span>© 2026 Jimi Visser · Amsterdam</span>
   <span>Growth Lead · WPP Production</span>
 </footer>
+
+<!-- APPLICATION BAR -->
+<div class="apply-band" id="applyBand" role="region" aria-label="Netflix application links">
+  <span class="ab-tag">For Netflix</span>
+  <b>Sr. Account Manager, Benelux</b>
+  <div class="ab-links">
+    <a href="netflix-senior-account-manager-benelux/" class="p">Application page &rarr;</a>
+    <a href="netflix-senior-account-manager-benelux/Jimi-Visser-Resume.pdf" target="_blank" rel="noopener">Resume PDF</a>
+    <a href="netflix-senior-account-manager-benelux/Jimi-Visser-Work-Samples.pdf" target="_blank" rel="noopener">Work samples</a>
+    <a href="cv.html">Background</a>
+  </div>
+  <button class="ab-x" id="applyBandX" aria-label="Hide this bar">&#10005;</button>
+</div>
 
 <!-- VIDEO MODAL -->
 <div class="modal" id="modal" onclick="closeVid(event)">
@@ -543,6 +573,18 @@
   /* ---- reveal on scroll ---- */
   const io=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting)x.target.classList.add('on');});},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  /* ---- application bar: only for visitors arriving via ?netflix (remembered for the session) ---- */
+  (function(){
+    const band=document.getElementById('applyBand'),x=document.getElementById('applyBandX');
+    let store=null; try{store=window.sessionStorage;}catch(e){}
+    const get=k=>{try{return store&&store.getItem(k);}catch(e){return null;}};
+    const set=(k,v)=>{try{store&&store.setItem(k,v);}catch(e){}};
+    const q=new URLSearchParams(location.search);
+    if(q.has('netflix')){set('for','netflix');set('forHide','');}
+    if((q.has('netflix')||get('for')==='netflix')&&!get('forHide'))band.classList.add('on');
+    x.addEventListener('click',()=>{band.classList.remove('on');set('forHide','1');});
+  })();
 </script>
 </body>
 </html>
